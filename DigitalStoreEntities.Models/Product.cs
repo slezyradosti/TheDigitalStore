@@ -1,0 +1,21 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using DigitalStore.Models.Base;
+
+namespace DigitalStore.Models
+{
+    internal class Product : EntityBase
+    {
+        [Key]
+        public int ProductId { get; set; }
+
+        [StringLength(50)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        public string ProductName { get; set; }
+        public int ProductPrice { get; set; }
+        public int CategoryId { get; set; }
+
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
+    }
+}
