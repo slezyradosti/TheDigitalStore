@@ -37,7 +37,7 @@ namespace DigitalStore.EF
                 optionsBuilder.UseSqlServer(
                     connectionString,
                     options => options.EnableRetryOnFailure())
-                    .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+                    .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryPossibleExceptionWithAggregateOperatorWarning));
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
