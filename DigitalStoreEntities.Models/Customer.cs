@@ -4,7 +4,7 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    internal class Customer
+    internal class Customer : EntityBase
     {
         [Key]
         public int CustomerId { get; set; }
