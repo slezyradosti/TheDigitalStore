@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalStore.WebUI", "Digit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalStore", "DigitalStore\DigitalStore.csproj", "{1CE37231-8465-4F91-B6AF-91B3A8A4C59A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalStore.Models", "DigitalStoreEntities.Models\DigitalStore.Models.csproj", "{88795DA7-7BBC-4993-8E95-0338A8681619}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1CE37231-8465-4F91-B6AF-91B3A8A4C59A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CE37231-8465-4F91-B6AF-91B3A8A4C59A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CE37231-8465-4F91-B6AF-91B3A8A4C59A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88795DA7-7BBC-4993-8E95-0338A8681619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88795DA7-7BBC-4993-8E95-0338A8681619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88795DA7-7BBC-4993-8E95-0338A8681619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88795DA7-7BBC-4993-8E95-0338A8681619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

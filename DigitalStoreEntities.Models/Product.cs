@@ -4,7 +4,7 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    internal class Product : EntityBase
+    public class Product : EntityBase
     {
         [Key]
         public int ProductId { get; set; }
@@ -14,6 +14,7 @@ namespace DigitalStore.Models
         public string ProductName { get; set; }
         public int ProductPrice { get; set; }
         public int CategoryId { get; set; }
+        public List<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }

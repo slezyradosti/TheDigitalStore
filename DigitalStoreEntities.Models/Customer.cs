@@ -4,22 +4,23 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    internal class Customer : EntityBase
+    public class Customer : EntityBase
     {
         [Key]
         public int CustomerId { get; set; }
         [StringLength(25)]
         //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
         [StringLength(25)]
         //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
-        public string Midname { get; set; }
+        public string MidName { get; set; }
         [StringLength(25)]
         //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
         public string LastName { get; set; }
         [StringLength(10)]
         public string PhoneNumber { get; set; }
         public int CityId { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
 
         [ForeignKey(nameof(CityId))]
         public City City { get; set; }
