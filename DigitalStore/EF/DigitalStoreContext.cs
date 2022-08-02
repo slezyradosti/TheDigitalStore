@@ -7,15 +7,15 @@ namespace DigitalStore.EF
 {
     public class DigitalStoreContext : DbContext
     {
-        internal DigitalStoreContext()
+        public DigitalStoreContext()
         {
 
         }
 
-        public DigitalStoreContext(DbContextOptions options) : base(options)
+        public DigitalStoreContext(DbContextOptions<DigitalStoreContext> options) : base(options)
         {
-
         }
+
         public DbSet<DigitalStore.Models.Category> Customers { get; set; }
         public DbSet<DigitalStore.Models.Category> Categories { get; set; }
         public DbSet<DigitalStore.Models.City> Cities { get; set; }
@@ -32,7 +32,7 @@ namespace DigitalStore.EF
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=AutoLotCore2;integrated security=True;
+                var connectionString = @"server=DESKTOP-QT7HQTJ;database=DigitalStore;integrated security=True;
                     MultipleActiveResultSets=True;App=EntityFramework;";
                 optionsBuilder.UseSqlServer(
                     connectionString,
