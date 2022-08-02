@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using DigitalStore.Models;
+﻿using DigitalStore.Models;
 
 namespace DigitalStore.Repos
 {
