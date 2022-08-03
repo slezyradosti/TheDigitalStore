@@ -1,0 +1,44 @@
+﻿@using DigitalStore.Models
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<header>
+    <nav aria-label="Product Paging">
+        @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
+    </nav>
+</header>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+			<h2 class="text-primary">Category List</h2>
+		</div>
+        <dib class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-primary" style="width:300px">
+                <i class="bg-info bi-plus-square"></i> &nbsp; Add Product
+            </a>
+        </dib>
+    </div>
+    <br/><br/>
+
+    @foreach (var product in Model)
+    {
+        <div class="item p-3">
+            <h3>@product.ProductName</h3>
+             <h4>@product.ProductPrice.ToString("# $")</h4>
+        </div>
+    }
+
+    <div class="page-link">
+        
+    </div>
+</div>
+
+<footer>
+    <nav>
+        <vc:pager paging-list="@Model"/>
+    </nav>
+</footer>

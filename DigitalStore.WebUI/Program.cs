@@ -10,6 +10,7 @@ builder.Services.AddDbContext<DigitalStoreContext>(options => options.UseSqlServ
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddPaging();
 
 var app = builder.Build();
 

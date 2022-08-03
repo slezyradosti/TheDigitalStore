@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DigitalStore.Models;
 using DigitalStore.Repos;
+using ReflectionIT.Mvc.Paging;
 
 namespace DigitalStore.WebUI.Controllers
 {
@@ -17,16 +18,13 @@ namespace DigitalStore.WebUI.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            return View(_repo.GetAll());
-            //return View("IndexWithViewComponent");
-        }
-
-        public IActionResult List()
-        {
-            var objProductList = _repo.GetAll();
+            int pageSize = 10;
+            var objProductList = (IOrderedQueryable<Product>)_repo.GetAll();
+            var model = await PagingList.CreateAsync(objProductList, pageSize, pageIndex);
             return View(objProductList);
+            //return View("IndexWithViewComponent");
         }
 
         public IActionResult Details(int? id)
