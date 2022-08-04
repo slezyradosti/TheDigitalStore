@@ -1,6 +1,7 @@
 using DigitalStore.EF;
-//using DigitalStore.Repos;
+using DigitalStore.Repos;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<DigitalStoreContext>(options => options.UseSqlServ
     ));
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddPaging();
+builder.Services.AddScoped<IProductRepo, ProductRepo>();
 
 var app = builder.Build();
 

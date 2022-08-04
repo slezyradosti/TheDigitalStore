@@ -1,22 +1,24 @@
 ﻿@using DigitalStore.Models
-@model IEnumerable<Product>
+@model ReflectionIT.Mvc.Paging.PagingList<Product>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@*@model IEnumerable<Product>*@
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<header>
-    <nav aria-label="Product Paging">
-        @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
-    </nav>
-</header>
+<div class="col-6">
+	<h2 class="text-primary">Product List</h2>
+</div>
+
+<nav aria-label="Product Paging">
+    @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
+</nav>
 
 <div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-			<h2 class="text-primary">Category List</h2>
-		</div>
-        <dib class="col-6 text-end">
+    <div class="row pt-4">      
+        <dib class="col-3 text-end">
             <a asp-controller="Product" asp-action="Create" class="btn btn-primary" style="width:300px">
                 <i class="bg-info bi-plus-square"></i> &nbsp; Add Product
             </a>
@@ -37,8 +39,6 @@
     </div>
 </div>
 
-<footer>
-    <nav>
-        <vc:pager paging-list="@Model"/>
-    </nav>
-</footer>
+<nav>
+    @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
+</nav>

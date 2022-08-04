@@ -1,0 +1,40 @@
+﻿@using DigitalStore.Models
+@model Product
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Product</h2>
+            <hr/>
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+        <div class="mb-3">
+            <p></><label asp-for="ProductName"></label></p>
+            <input asp-for="ProductName" class="form-contorl" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <p><label asp-for="ProductPrice"></label></p>
+            <input asp-for="ProductPrice" class="form-contorl" />
+            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <p><label asp-for="Category"></label></p>
+            <input asp-for="Category" class="form-contorl" />
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">
+            Create
+        </button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+</form>
+
+@*Standard data validation will be performed on the client side, not on the server*@
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

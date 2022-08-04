@@ -12,18 +12,20 @@ namespace DigitalStore.WebUI.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepo _repo;
+        private const int pageSize = 5; 
 
         public ProductController(IProductRepo repo)
         {
             _repo = repo;
         }
 
-        public async Task<IActionResult> Index(int pageIndex = 1)
+        public IActionResult Index(int pageIndex = 1)
         {
-            int pageSize = 10;
-            var objProductList = (IOrderedQueryable<Product>)_repo.GetAll();
-            var model = await PagingList.CreateAsync(objProductList, pageSize, pageIndex);
-            return View(objProductList);
+            //int pageSize = 5;
+            //var objProductList = _repo.GetAll();
+            var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(p => p.ProductName);
+            var model = PagingList.Create(qry, pageSize, pageIndex);
+            return View(model);
             //return View("IndexWithViewComponent");
         }
 

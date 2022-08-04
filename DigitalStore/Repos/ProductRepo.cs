@@ -14,7 +14,7 @@ namespace DigitalStore.Repos
         }
 
         public override List<Product> GetAll()
-            => GetAll(x => x.ProductName, true).ToList();
+            => GetAll(p => p.ProductName, true).ToList();
 
         public List<Product> Search(string searchString)
             => Context.Products.Where(p => Functions.Like(p.ProductName, $"%{searchString}%")).ToList();
@@ -23,6 +23,6 @@ namespace DigitalStore.Repos
         //    => GetSome(x => x.isPromoted == true);
 
         public List<Product> GetRelatedData()
-            => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(x => x.Category).ToList();
+            => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category).ToList();
     }
 }
