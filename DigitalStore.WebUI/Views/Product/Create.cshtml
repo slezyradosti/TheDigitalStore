@@ -2,6 +2,7 @@
 @model Product
 
 <form method="post">
+    <input asp-for="Id" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Create Product</h2>
@@ -18,15 +19,16 @@
             <input asp-for="ProductPrice" class="form-contorl" />
             <span asp-validation-for="ProductPrice" class="text-danger"></span>
         </div>
-        <div class="mb-3">
+        @*<div class="mb-3">
             <p><label asp-for="Category"></label></p>
             <input asp-for="Category" class="form-contorl" />
             <span asp-validation-for="Category" class="text-danger"></span>
-        </div>
+        </div>*@
         <button type="submit" class="btn btn-primary" style="width:150px">
             Create
         </button>
-        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px">
+
+        <a asp-controller="Product" asp-action="Index" asp-route-id="" class="btn btn-secondary" style="width:150px">
             Back to List
         </a>
     </div>

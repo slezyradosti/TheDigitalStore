@@ -1,7 +1,46 @@
-﻿
+﻿@using DigitalStore.Models
+@model ReflectionIT.Mvc.Paging.PagingList<Category>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
+@*@model IEnumerable<Product>*@
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="col-6">
+	<h2 class="text-primary">Category List</h2>
+</div>
 
+<nav class="btn-group" aria-label="Product Paging">
+    @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
+</nav>
+
+<div class="container p-3">
+    <div class="row pt-4">      
+        
+    </div>
+
+    @foreach (var product in Model)
+    {
+        <div class="item p-3">
+            @*<form asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                @*<input asp-for="@product.Id" hidden />
+                <button type="submit" class="btn btn-light" style="width:150px">
+                    @product.CategoryName
+                </button>
+            </form>*@
+
+            <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id" class="btn alert-link mx-2">
+							<i class="bi bi-pencil"></i>@product.CategoryName</a>
+        </div>
+    }
+
+    <div class="page-link">
+        
+    </div>
+</div>
+
+<nav>
+    @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
+</nav>

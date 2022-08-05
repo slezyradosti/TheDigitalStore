@@ -18,6 +18,10 @@ namespace DigitalStore.Repos
 
         public List<Product> Search(string searchString)
             => Context.Products.Where(p => Functions.Like(p.ProductName, $"%{searchString}%")).ToList();
+        public List<Product> Search(int? categoryId)
+            => Context.Products.Where(p => p.Category.Id == categoryId).ToList();
+        public List<Product> Search(Category category)
+            => Context.Products.Where(p => p.Category == category).ToList();
 
         //public List<Product> GetPromotionalProducts()
         //    => GetSome(x => x.isPromoted == true);

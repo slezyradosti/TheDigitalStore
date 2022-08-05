@@ -63,3 +63,55 @@ button.accept-policy {
     white-space: nowrap;
     line-height: 60px;
 }
+
+/*NOT bad without color*/
+/*.pagination {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.pagination li {
+    display: inline;
+    text-align: center;
+}
+
+.pagination a {
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: #585858;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+}*/
+
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {
+    display: inline;
+}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+    ul.pagination li.active a {
+        background-color: #6aa6f2;
+        color: white;
+    }
+
+ul.pagination li a:hover:not(:active) {
+    background-color: #ddd;
+}

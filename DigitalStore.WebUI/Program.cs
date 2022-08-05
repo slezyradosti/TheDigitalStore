@@ -13,6 +13,7 @@ builder.Services.AddDbContext<DigitalStoreContext>(options => options.UseSqlServ
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddPaging();
 builder.Services.AddScoped<IProductRepo, ProductRepo>();
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 
 var app = builder.Build();
 

@@ -12,8 +12,8 @@
 	<h2 class="text-primary">Product List</h2>
 </div>
 
-<nav aria-label="Product Paging">
-    @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
+<nav class="pagination">
+     @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
 </nav>
 
 <div class="container p-3">
