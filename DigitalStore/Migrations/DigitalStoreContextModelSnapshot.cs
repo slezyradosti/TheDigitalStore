@@ -163,6 +163,11 @@ namespace DigitalStore.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(50)

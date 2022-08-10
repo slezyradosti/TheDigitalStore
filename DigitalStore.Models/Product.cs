@@ -14,6 +14,10 @@ namespace DigitalStore.Models
         [Display(Name = "Product Price")]
         public int ProductPrice { get; set; }
         public int CategoryId { get; set; }
+
+        [StringLength(300)]
+        [Display(Name = "Product Description")]
+        public string ProductDescription { get; set; }
         public List<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
         [ForeignKey(nameof(CategoryId))]

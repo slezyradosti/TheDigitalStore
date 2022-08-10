@@ -29,16 +29,26 @@
     @foreach (var product in Model)
     {
         <div class="item p-3">
-            <h3>@product.ProductName</h3>
-             <h4>@product.ProductPrice.ToString("# $")</h4>
+            <div class="rowItem">
+                <div class="forPrice">
+                   @product.ProductPrice.ToString("# $")
+                </div>
+                <div class="forName">  
+                   <h3>@product.ProductName</h3>                  
+                </div>
+
+                <p>@product.ProductDescription</p>
+
+                <a asp-controller="Product" asp-action="Buy" asp-route-id="@product.Id" class="btn btn-secondary" style="width:150px">
+                    Buy
+                </a>
+            </div>     
         </div>
     }
 
-    <div class="page-link">
-        
-    </div>
+    
 </div>
 
-<nav>
+<nav class="pagination">
     @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
 </nav>

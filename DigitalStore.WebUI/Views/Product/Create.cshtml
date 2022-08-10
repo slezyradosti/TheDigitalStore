@@ -3,6 +3,7 @@
 
 <form method="post">
     <input asp-for="Id" hidden />
+    <input asp-for="CategoryId" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Create Product</h2>
@@ -28,7 +29,7 @@
             Create
         </button>
 
-        <a asp-controller="Product" asp-action="Index" asp-route-id="" class="btn btn-secondary" style="width:150px">
+        <a asp-controller="Product" asp-action="Index" asp-route-id="CategoryId" class="btn btn-secondary" style="width:150px">
             Back to List
         </a>
     </div>
