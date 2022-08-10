@@ -16,38 +16,39 @@
      @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
 </nav>
 
-<div class="container p-3">
-    <div class="row pt-4">      
-        <dib class="col-3 text-end">
-            <a asp-controller="Product" asp-action="Create" class="btn btn-primary" style="width:300px">
-                <i class="bg-info bi-plus-square"></i> &nbsp; Add Product
-            </a>
-        </dib>
-    </div>
-    <br/><br/>
-
-    @foreach (var product in Model)
-    {
-        <div class="item p-3">
-            <div class="rowItem">
-                <div class="forPrice">
-                   @product.ProductPrice.ToString("# $")
-                </div>
-                <div class="forName">  
-                   <h3>@product.ProductName</h3>                  
-                </div>
-
-                <p>@product.ProductDescription</p>
-
-                <a asp-controller="Product" asp-action="Buy" asp-route-id="@product.Id" class="btn btn-secondary" style="width:150px">
-                    Buy
+<form method="post">
+    <div class="container p-3">
+        <div class="row pt-4">      
+            <dib class="col-3 text-end">
+                <a asp-controller="Product" asp-action="Create" class="btn btn-primary" style="width:300px">
+                    <i class="bg-info bi-plus-square"></i> &nbsp; Add Product
                 </a>
-            </div>     
+            </dib>
         </div>
-    }
+        <br/><br/>
 
-    
-</div>
+        @foreach (var product in Model)
+        {
+            <div class="item p-3">
+                <div class="rowItem">
+                    <div class="forPrice">
+                       @product.ProductPrice.ToString("# $")
+                    </div>
+                    <div class="forName">  
+                       <h3>@product.ProductName</h3>                  
+                    </div>
+                    <p>@product.ProductDescription</p>
+                    <a asp-controller="Product" asp-action="Buy" asp-route-id="@product.Id" class="btn btn-primary" style="width:125px">
+                        Buy
+                    </a>
+                    <a asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">
+                        Add To Cart
+                    </a>
+                </div>     
+            </div>
+        } 
+    </div>
+</form>
 
 <nav class="pagination">
     @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
