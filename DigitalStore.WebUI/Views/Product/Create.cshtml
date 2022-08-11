@@ -28,12 +28,12 @@
         <button type="submit" class="btn btn-primary" style="width:150px">
             Create
         </button>
-
-        <a asp-controller="Product" asp-action="Index" asp-route-id="CategoryId" class="btn btn-secondary" style="width:150px">
-            Back to List
-        </a>
     </div>
 </form>
+
+<a asp-controller="Product" asp-action="Index" asp-route-id="@Model.CategoryId" class="btn btn-secondary" style="width:150px">
+    Back to List
+</a>
 
 @*Standard data validation will be performed on the client side, not on the server*@
 @section Scripts{

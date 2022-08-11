@@ -35,13 +35,15 @@
                        @product.ProductPrice.ToString("# $")
                     </div>
                     <div class="forName">  
-                       <h3>@product.ProductName</h3>                  
+                       <h3>
+                           <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="link page-link">@product.ProductName</a>
+                       </h3>                  
                     </div>
                     <p>@product.ProductDescription</p>
                     <a asp-controller="Product" asp-action="Buy" asp-route-id="@product.Id" class="btn btn-primary" style="width:125px">
                         Buy
                     </a>
-                    <a asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">
                         Add To Cart
                     </a>
                 </div>     

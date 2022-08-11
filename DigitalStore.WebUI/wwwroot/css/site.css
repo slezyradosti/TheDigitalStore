@@ -117,9 +117,16 @@ ul.pagination li a:hover:not(:active) {
     background-color: #ddd;
 }
 .rowItem {
-    background-color: #d9d8d8;
+    background-color: #E9F0F1;
     border-style: outset;
-    padding: 2px;
+    padding: 5px;
+}
+
+.oneItem {
+    background-color: #E9F0F1;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
 }
 
 .forPrice {

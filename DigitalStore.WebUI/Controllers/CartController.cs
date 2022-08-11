@@ -1,32 +1,30 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using DigitalStore.Models;
 using DigitalStore.Repos;
-using ReflectionIT.Mvc.Paging;
 using DigitalStore.Models.NotForDB;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Web;
 
 namespace DigitalStore.WebUI.Controllers
 {
     public class CartController : Controller
     {
         private readonly IProductRepo _repo;
+        private static Cart Cart = new Cart();
+        
         public CartController(IProductRepo repo)
         {
             _repo = repo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl)
         {
-            return View();
+            //return View(new CartIndexViewModel
+            //{
+            //    Cart = GetCart(),
+            //    ReturnUrl = returnUrl
+            //});
+            return View(Cart);
         }
 
         public IActionResult AddToCart(int Id, string returnUrl)
@@ -51,15 +49,19 @@ namespace DigitalStore.WebUI.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
+        //public byte[] GetCart()
+        //{
+        //    HttpContext.Session.TryGetValue("Cart", out byte[] cart); //HttpContext.Current.Session["Cart"];
+        //    if (cart == null)
+        //    {
+        //        cart = new byte[1];
+        //        HttpContext.Session.Set("Cart", cart);
+        //    }
+        //    return cart;
+        //}
         public Cart GetCart()
         {
-            //Cart cart = (Cart)Session["Cart"];
-            //if (cart == null)
-            //{
-            //    cart = new Cart();
-            //    Session["Cart"] = cart;
-            //}
-            //return cart;
+            return Cart;
         }
     }
 }
