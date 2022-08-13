@@ -33,7 +33,8 @@ namespace DigitalStore.WebUI.Controllers
 
             if (product != null)
             {
-                GetCart().AddItem(product, 1);
+                Cart.AddItem(product, 1); // Cart = GetCart()
+                TempData["success"] = "Product added to Cart";
             }
             return RedirectToAction("Index");
         }
@@ -44,7 +45,8 @@ namespace DigitalStore.WebUI.Controllers
 
             if (product != null)
             {
-                GetCart().RemoveLine(product);
+                Cart.RemoveLine(product); // Cart = GetCart()
+                TempData["success"] = "Product removed from Cart";
             }
             return RedirectToAction("Index", new { returnUrl });
         }
@@ -59,9 +61,5 @@ namespace DigitalStore.WebUI.Controllers
         //    }
         //    return cart;
         //}
-        public Cart GetCart()
-        {
-            return Cart;
-        }
     }
 }

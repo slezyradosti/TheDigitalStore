@@ -5,14 +5,15 @@
     ViewBag.Title = "GameStore: ваша корзина";
 }
 
-<h2>Ваша корзина</h2>
+<h2>Your cart</h2>
 <table class="table">
     <thead>
         <tr>
-            <th>Кол-во</th>
-            <th>Товар</th>
-            <th class="text-right">Цена</th>
-            <th class="text-right">Общая цена</th>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Total cost</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +22,12 @@
             <tr>
                 <td class="text-center">@line.Quantity</td>
                 <td class="text-left">@line.Product.ProductName</td>
-                <td class="text-right">@line.Product.ProductPrice.ToString("# руб")</td>
+                <td class="text-right">@line.Product.ProductPrice.ToString("# $")</td>
                 <td class="text-right">
-                    @((line.Quantity * line.Product.ProductPrice).ToString("# руб"))
+                    @((line.Quantity * line.Product.ProductPrice).ToString("# $"))
+                </td>
+                <td class="text-right">
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@line.Product.Id" class="btn btn-sm btn-warning" type="submit">Remove</a>
                 </td>
             </tr>
         }
@@ -32,7 +36,7 @@
         <tr>
             <td colspan="3" class="text-right">Итого:</td>
             <td class="text-right">
-                @Model.ComputeTotalValue().ToString("# руб")
+                @Model.ComputeTotalValue().ToString("# $")
             </td>
         </tr>
     </tfoot>
