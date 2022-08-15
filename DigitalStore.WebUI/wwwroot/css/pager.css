@@ -1,39 +1,27 @@
-﻿.pager {
-    width: 100%;
-    margin: 0px;
+﻿ul.pagination {
     display: inline-block;
-    padding: 0px;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.pager ul {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-}
+    ul.pagination li {
+        display: inline;
+    }
 
-.pager ul li {
-    float: left;
-    min-width: 30px;
-    text-align: center;
-}
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-.pager ul li span {
-    display: block;
-    margin: 0px 1px;
-    padding: 4px;
-    text-decoration: none;
-    border: 1px solid #ccc;
-}
+        ul.pagination li.active a {
+            background-color: #6aa6f2;
+            color: white;
+        }
 
-.pager ul li a {
-    display: block;
-    margin: 0px 1px;
-    padding: 4px;
-    text-decoration: none;
-    border: 1px solid #ccc;
-}
-
-.highlighted {
-    background-color: #ccc;
-    color: #000;
-}
+        ul.pagination li a:hover:not(:active) {
+            background-color: #ddd;
+        }

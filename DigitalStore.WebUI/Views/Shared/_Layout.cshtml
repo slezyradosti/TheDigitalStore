@@ -42,17 +42,13 @@
                             <a class="dropdown-item" href="#">Something else here</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a>
-
                             @*<select asp-items="@(new SelectList())"></select>*@
-
                           </div>
                          </li>
-                         <li class="nav-item" style="float:right">
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">
-                                 <i class="bi bi-basket3"></i>
-                             </a>
-                         </li>
                     </ul>
+                    <a class="nav-link text-dark" id="cartId" asp-area="" asp-controller="Cart" asp-action="Index">
+                        <i class="bi bi-basket3"></i>
+                    </a>
                 </div>
             </div>
         </nav>

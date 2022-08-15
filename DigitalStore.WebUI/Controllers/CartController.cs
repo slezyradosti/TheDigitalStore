@@ -10,11 +10,13 @@ namespace DigitalStore.WebUI.Controllers
     public class CartController : Controller
     {
         private readonly IProductRepo _repo;
+        private readonly IOrderProcessor _orderProcessor;
         private static Cart Cart = new Cart();
         
-        public CartController(IProductRepo repo)
+        public CartController(IProductRepo repo, IOrderProcessor processor)
         {
             _repo = repo;
+            _orderProcessor = processor;
         }
 
         public IActionResult Index(string returnUrl)
@@ -61,5 +63,31 @@ namespace DigitalStore.WebUI.Controllers
         //    }
         //    return cart;
         //}
+
+        public IActionResult Checkout()
+        {
+            return View(new ShippingDetails());
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        {
+            if (cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "Sorry, your basket is empty!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _orderProcessor.ProcessOrder(cart, shippingDetails);
+                cart.Clear();
+                TempData["success"] = "Order processed";
+                return View("Completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
+        }
     }
 }
