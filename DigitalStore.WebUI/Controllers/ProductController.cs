@@ -82,6 +82,8 @@ namespace DigitalStore.WebUI.Controllers
             return View(inventory);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ProductName,ProductPrice,CategoryId,Id,Timestamp")] Product product)
         {
             if (id != product.Id)
