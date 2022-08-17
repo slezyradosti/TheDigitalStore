@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DigitalStore.Models.NotForDB
+﻿namespace DigitalStore.Models.NotForDB
 {
     public class Cart
     {
@@ -49,11 +43,5 @@ namespace DigitalStore.Models.NotForDB
         {
             get { return lineCollection; }
         }
-    }
-
-    public class CartLine
-    {
-        public Product Product { get; set; }
-        public int Quantity { get; set; }
     }
 }

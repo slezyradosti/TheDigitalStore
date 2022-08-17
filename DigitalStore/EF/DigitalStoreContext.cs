@@ -16,7 +16,7 @@ namespace DigitalStore.EF
         {
         }
 
-        public DbSet<DigitalStore.Models.Category> Customers { get; set; }
+        public DbSet<DigitalStore.Models.Customer> Customers { get; set; }
         public DbSet<DigitalStore.Models.Category> Categories { get; set; }
         public DbSet<DigitalStore.Models.City> Cities { get; set; }
         public DbSet<DigitalStore.Models.Order> Orders { get; set; }

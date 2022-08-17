@@ -9,13 +9,15 @@ namespace DigitalStore.WebUI.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IProductRepo _repo;
+        private readonly IProductRepo _productRepo;
+        private readonly ICustomerRepo _customerRepo;
         private readonly IOrderProcessor _orderProcessor;
         private static Cart Cart = new Cart();
         
-        public CartController(IProductRepo repo, IOrderProcessor processor)
+        public CartController(IProductRepo prepo, ICustomerRepo crepo, IOrderProcessor processor)
         {
-            _repo = repo;
+            _productRepo = prepo;
+            _customerRepo = crepo;
             _orderProcessor = processor;
         }
 
@@ -31,7 +33,7 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult AddToCart(int Id, string returnUrl)
         {
-            Product product = _repo.GetOne(Id);
+            Product product = _productRepo.GetOne(Id);
 
             if (product != null)
             {
@@ -43,7 +45,7 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult RemoveFromCart(int Id, string returnUrl)
         {
-            Product product = _repo.GetOne(Id);
+            Product product = _productRepo.GetOne(Id);
 
             if (product != null)
             {
@@ -94,7 +96,7 @@ namespace DigitalStore.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Checkout(ShippingDetails shippingDetails)
+        public IActionResult Checkout(Customer customer)
         {
             if (Cart.Lines.Count() == 0)
             {
@@ -103,14 +105,20 @@ namespace DigitalStore.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                _orderProcessor.ProcessOrder(Cart, shippingDetails);
+                //добавляю неавторизованного покупателя
+                _customerRepo.Add(customer);
+
+                _orderProcessor.ProcessOrder(Cart, customer);
+                var order =  _orderProcessor.CreateOrder(customer);
+                _orderProcessor.AddOrderListToDb(Cart, order);
+
                 Cart.Clear();
                 TempData["success"] = "Order processed";
                 return View("Completed");
             }
             else
             {
-                return View(shippingDetails);
+                return View(customer);
             }
         }
     }

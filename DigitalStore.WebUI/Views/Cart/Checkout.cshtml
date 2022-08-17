@@ -1,5 +1,5 @@
-﻿@using DigitalStore.Models.NotForDB
-@model ShippingDetails
+﻿@using DigitalStore.Models
+@model Customer
 
 @{
     ViewData["Title"] = "Checkout";
@@ -9,47 +9,33 @@
 <p>Please enter your contact information</p>
 
 <form method="post">
-    <h3>Data</h3>
+    <h3>Your Data</h3>
     <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MidName"></label>
+        <input asp-for="MidName" class = "form-control" />
+        <span asp-validation-for="MidName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class = "form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
 
-    <h3>Shipping address</h3>
+    <h3>Your Name</h3>
     <div class="form-group">
-        <label asp-for="AddressLine1"></label>
-        <input asp-for="AddressLine1" class = "form-control" />
-        <span asp-validation-for="AddressLine1" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="AddressLine2"></label>
-        <input asp-for="AddressLine2" class = "form-control" />
-        <span asp-validation-for="AddressLine2" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="AddressLine3"></label>
-        <input asp-for="AddressLine3" class = "form-control" />
-        <span asp-validation-for="AddressLine3" class="text-danger"></span>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class = "form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
        <label asp-for="City"></label>
         <input asp-for="City" class = "form-control" />
         <span asp-validation-for="City" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Country"></label>
-        <input asp-for="Country" class = "form-control" />
-        <span asp-validation-for="Country" class="text-danger"></span>
-    </div>
-
-    <h3>Options</h3>
-    <div class="checkbox">
-        <label>
-            @*@Html.EditorFor(x => x.GiftWrap)*@
-            <input asp-for="GiftWrap" />
-            Use gift wrap?
-        </label>
     </div>
 
     <div class="text-center">

@@ -27,6 +27,6 @@ namespace DigitalStore.Repos
         //    => GetSome(x => x.isPromoted == true);
 
         public List<Product> GetRelatedData()
-            => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category).ToList();
+            => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category.CategoryName).ToList();
     }
 }

@@ -43,7 +43,7 @@ namespace DigitalStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("DigitalStore.Models.City", b =>
@@ -114,7 +114,7 @@ namespace DigitalStore.Migrations
                     b.HasIndex("FirstName", "MidName", "LastName")
                         .IsUnique();
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("DigitalStore.Models.Order", b =>
