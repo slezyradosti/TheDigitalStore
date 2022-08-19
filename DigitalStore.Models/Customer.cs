@@ -17,10 +17,11 @@ namespace DigitalStore.Models
         public string LastName { get; set; }
         [StringLength(10)]
         public string PhoneNumber { get; set; }
+
         public int CityId { get; set; }
         public List<Order> Orders { get; set; } = new List<Order>();
 
-        [ForeignKey(nameof(CityId))]
+        [ForeignKey("CityId")]
         public City City { get; set; }
     }
 }

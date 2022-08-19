@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using DigitalStore.Models;
 using DigitalStore.Repos;
 using DigitalStore.Models.NotForDB;
@@ -12,13 +13,15 @@ namespace DigitalStore.WebUI.Controllers
         private readonly IProductRepo _productRepo;
         private readonly ICustomerRepo _customerRepo;
         private readonly IOrderProcessor _orderProcessor;
+        private readonly ICityRepo _cityRepo;
         private static Cart Cart = new Cart();
         
-        public CartController(IProductRepo prepo, ICustomerRepo crepo, IOrderProcessor processor)
+        public CartController(IProductRepo prepo, ICustomerRepo crepo, ICityRepo cityRepo,IOrderProcessor processor)
         {
             _productRepo = prepo;
             _customerRepo = crepo;
             _orderProcessor = processor;
+            _cityRepo = cityRepo;
         }
 
         public IActionResult Index(string returnUrl)
@@ -68,7 +71,9 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Checkout()
         {
-            return View(new ShippingDetails());
+            ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
+            //ViewBag.cities = new SelectList(_cityRepo.GetOne(1));
+            return View();
         }
 
         //[HttpPost]
@@ -103,23 +108,26 @@ namespace DigitalStore.WebUI.Controllers
                 ModelState.AddModelError("", "Sorry, your basket is empty!");
             }
 
-            if (ModelState.IsValid)
-            {
-                //добавляю неавторизованного покупателя
-                _customerRepo.Add(customer);
+            customer.City = _cityRepo.GetOne(customer.CityId);
 
-                _orderProcessor.ProcessOrder(Cart, customer);
-                var order =  _orderProcessor.CreateOrder(customer);
-                _orderProcessor.AddOrderListToDb(Cart, order);
+            //if (ModelState.IsValid) // obj City and Timestamp Invalid. WHY????????
+            //{
+            //добавляю неавторизованного покупателя
+            _customerRepo.Add(customer);
 
-                Cart.Clear();
-                TempData["success"] = "Order processed";
-                return View("Completed");
-            }
-            else
-            {
-                return View(customer);
-            }
+            _orderProcessor.ProcessOrder(Cart, customer);
+            var order = _orderProcessor.CreateOrder(customer);
+            _orderProcessor.AddOrderListToDb(Cart, order);
+
+            Cart.Clear();
+            TempData["success"] = "Order processed";
+            return View("Completed");
+            //}
+            //else
+            //{
+            //    ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
+            //    return View(customer);
+            //}
         }
     }
 }

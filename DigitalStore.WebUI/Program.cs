@@ -20,6 +20,7 @@ builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 builder.Services.AddScoped<IOrderProcessor, EmailOrderProcessor>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<IProductOrderRepo, ProductOrderRepo>();
+builder.Services.AddScoped<ICityRepo, CityRepo>();
 //builder.Services.AddHttpClient();
 builder.Services.AddScoped<EmailSettings, EmailSettings>();
 builder.Services.AddTransient<IOrderProcessor, EmailOrderProcessor>();

@@ -83,8 +83,8 @@ namespace DigitalStore.Models.NotForDB
             Order newOrder = new Order();
             newOrder.OrderDate = DateTime.Now;
             newOrder.DeliveryDate = DateTime.Now;
-            newOrder.City = customer.City;
-            newOrder.Customer = customer;
+            newOrder.CityId = customer.CityId;
+            newOrder.CustomerId = customer.Id;
 
             _orderRepo.Add(newOrder);
 
@@ -96,8 +96,8 @@ namespace DigitalStore.Models.NotForDB
             foreach (var line in cart.Lines)
             {
                 ProductOrder newProductOrder = new ProductOrder();
-                newProductOrder.Product = line.Product;
-                newProductOrder.Order = order;
+                newProductOrder.ProductId = line.Product.Id;
+                newProductOrder.OrderId = order.Id;
 
                 _productOrderRepo.Add(newProductOrder);
             }
