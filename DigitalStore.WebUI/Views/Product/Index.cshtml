@@ -18,14 +18,24 @@
 
 <form method="post">
     <div class="container p-3">
-        @*<div class="row pt-4">      
+       @* <div class="row pt-4">      
             <dib class="col-3 text-end">
                 <a asp-controller="Product" asp-action="Create" class="btn btn-primary" style="width:300px">
                     <i class="bg-info bi-plus-square"></i> &nbsp; Add Product
                 </a>
             </dib>
+        </div>*@
+        <div  class="item p-3">
+            <label>Filters</label>
+            <select class="dropdown" data-bs-toggle="dropdown" name="sortOrder">
+                <option>Price (ascending)</option>
+                <option value="desc">Price (descending)</option>
+             </select>
+            <input type="text" name="searchString" />
+             <button type="submit" class="btn btn-primary" style="width:100px">
+                Search
+             </button>
         </div>
-        <br/><br/>*@
 
         @foreach (var product in Model)
         {

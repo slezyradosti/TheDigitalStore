@@ -144,4 +144,9 @@ button.accept-policy {
     float: right !important;
     margin-right: 15px;
     margin-left: 15px;
-} 
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}

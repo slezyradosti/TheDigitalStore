@@ -19,11 +19,25 @@ namespace DigitalStore.WebUI.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index(int? id, int pageIndex = 1)
+        public IActionResult Index(int? id, string sortOrder, string searchString, int pageIndex = 1)
         {
-            //int pageSize = 5;
-            //var objProductList = _repo.GetAll();
-            var qry = _repo.Search(id).AsQueryable().AsNoTracking().OrderBy(p => p.ProductName);
+            var qry = _repo.Search(id).AsQueryable().AsNoTracking();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                qry = qry.Where(q => q.ProductName.ToLower().Contains(searchString.ToLower())).AsQueryable();
+            }
+
+            switch (sortOrder)
+            {
+                case "desc":
+                    qry = qry.OrderByDescending(p => p.ProductPrice);
+                    break;
+                default:
+                    qry = qry.OrderBy(p => p.ProductPrice); //ask
+                    break;
+            }
+
             var model = PagingList.Create(qry, pageSize, pageIndex);
             return View(model);
             //return View("IndexWithViewComponent");

@@ -76,28 +76,6 @@ namespace DigitalStore.WebUI.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Checkout(Cart cart, ShippingDetails shippingDetails) // cart приходит пустой. скорее всего из-за реализации в статик, пока не знаю как решить.
-        //{
-        //    if (cart.Lines.Count() == 0)
-        //    {
-        //        ModelState.AddModelError("", "Sorry, your basket is empty!");
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        _orderProcessor.ProcessOrder(cart, shippingDetails);
-        //        cart.Clear();
-        //        TempData["success"] = "Order processed";
-        //        return View("Completed");
-        //    }
-        //    else
-        //    {
-        //        return View(shippingDetails);
-        //    }
-        //}
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
