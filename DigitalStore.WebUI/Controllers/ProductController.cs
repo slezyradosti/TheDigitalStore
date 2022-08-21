@@ -21,6 +21,9 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Index(int? id, string sortOrder, string searchString, int pageIndex = 1)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.SearchString = searchString;
+
             var qry = _repo.Search(id).AsQueryable().AsNoTracking();
 
             if (!String.IsNullOrEmpty(searchString))
@@ -30,17 +33,19 @@ namespace DigitalStore.WebUI.Controllers
 
             switch (sortOrder)
             {
-                case "desc":
+                case "Price (descending)":
                     qry = qry.OrderByDescending(p => p.ProductPrice);
                     break;
                 default:
-                    qry = qry.OrderBy(p => p.ProductPrice); //ask
+                    qry = qry.OrderBy(p => p.ProductPrice);
                     break;
             }
 
             var model = PagingList.Create(qry, pageSize, pageIndex);
+            model.RouteValue = new RouteValueDictionary {
+                { "searchString", searchString}
+            };
             return View(model);
-            //return View("IndexWithViewComponent");
         }
 
         public IActionResult Details(int? id)
