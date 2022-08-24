@@ -1,0 +1,22 @@
+﻿@using DigitalStore.Models
+@model IEnumerable<Category>
+
+@*<thead>
+     <h3>Category List</h3>
+</thead>*@
+<tbody>
+    @foreach (var item in Model)
+    {
+       @* <li>
+            <ul class="menu">
+                <a asp-controller="Product" asp-action="Index" asp-route-id="@item.Id" class="btn alert-link mx-2">
+                @item.CategoryName
+                 </a>
+            </ul>
+        </li>*@
+
+        <a asp-controller="Product" asp-action="Index" asp-route-id="@item.Id" class="dropdown-item">
+            @item.CategoryName
+        </a>
+    }
+</tbody>

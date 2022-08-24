@@ -1,0 +1,102 @@
+﻿hr {
+    clear: both;
+    max-width: 75rem;
+    height: 0;
+    margin: 1.25rem auto;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #cacaca;
+    border-left: 0
+}
+
+ol, ul {
+    margin-bottom: 1rem;
+    list-style-position: outside;
+    line-height: 1.6
+}
+
+li {
+    font-size: inherit
+}
+
+ul {
+    margin-left: 1.25rem;
+    list-style-type: disc
+}
+
+ol {
+    margin-left: 1.25rem
+}
+
+    ol ol, ol ul, ul ol, ul ul {
+        margin-left: 1.25rem;
+        margin-bottom: 0
+    }
+
+.accordion-menu li {
+    width: 100%
+}
+
+.accordion-menu a {
+    padding: .7rem 1rem
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+[data-whatinput=mouse] .menu li {
+    outline: 0
+}
+
+menu .button, .menu a {
+    line-height: 1;
+    text-decoration: none;
+    display: block;
+    padding: .7rem 1rem
+}
+
+.menu.nested {
+    margin-right: 0;
+    margin-left: 1rem
+}
+
+.menu .is-active > a {
+    background: #6c6db8;
+    color: #000
+}
+
+.menu .active > a {
+    background: #6c6db8;
+    color: #000
+}
+
+.menu.align-left {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start
+}
+
+#AdminTree span {
+    padding-left: .2rem
+}
+
+#AdminTree a:after {
+    content: none
+}
+
+.admin-tree-menu {
+    overflow-x: auto
+}
+
+.menu .is-active > a {
+    background-color: #e1e1e1
+}
