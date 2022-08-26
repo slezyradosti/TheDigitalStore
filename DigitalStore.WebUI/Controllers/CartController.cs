@@ -31,6 +31,7 @@ namespace DigitalStore.WebUI.Controllers
             //    Cart = GetCart(),
             //    ReturnUrl = returnUrl
             //});
+            ViewBag.Title = "My Title";
             return View(Cart);
         }
 
@@ -93,7 +94,7 @@ namespace DigitalStore.WebUI.Controllers
             //добавляю неавторизованного покупателя
             _customerRepo.Add(customer);
 
-            _orderProcessor.ProcessOrder(Cart, customer);
+            _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", Cart);
             var order = _orderProcessor.CreateOrder(customer);
             _orderProcessor.AddOrderListToDb(Cart, order);
 

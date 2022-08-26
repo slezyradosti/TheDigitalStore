@@ -9,5 +9,6 @@ namespace DigitalStore.Repos
         List<Product> Search(Category category);
         // List<Product> GetAllPromotionalProducts();
         List<Product> GetRelatedData();
+        List<Product> GetTenRandomItems(int productCount);
     }
 }

@@ -9,6 +9,7 @@ namespace DigitalStore.Repos
 {
     public class ProductRepo : BaseRepo<Product>, IProductRepo
     {
+        Random random = new Random();
         public ProductRepo(DigitalStoreContext context) : base(context)
         {
         }
@@ -28,5 +29,26 @@ namespace DigitalStore.Repos
 
         public List<Product> GetRelatedData()
             => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category.CategoryName).ToList();
+
+        public List<Product> GetTenRandomItems(int productCount)
+        {
+            List<Product> newProductList = new List<Product>();
+
+            var Ids = GetAll();
+            for (int i = 0; i < productCount; i++)
+            {
+                var item = GetOne(Ids[random.Next(0, Ids.Count() - 1)].Id);
+                if (!newProductList.Contains(item))
+                {
+                    newProductList.Add(item);
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            return newProductList;
+        }
     }
 }

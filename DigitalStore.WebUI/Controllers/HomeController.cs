@@ -1,4 +1,5 @@
-﻿using DigitalStore.WebUI.Models;
+﻿using DigitalStore.Repos;
+using DigitalStore.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace DigitalStore.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductRepo _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductRepo repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var randomList = _repo.GetTenRandomItems(6);
+            return View(randomList);
         }
 
         public IActionResult Privacy()

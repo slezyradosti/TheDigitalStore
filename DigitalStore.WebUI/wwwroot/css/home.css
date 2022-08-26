@@ -1,0 +1,47 @@
+﻿.bblock {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    border: 1px solid #000; /* Рамка вокруг текста */
+    padding: 3px; /* Поля вокруг текста */
+}
+
+.wrapp {
+    display: table;
+    border-spacing: 20px 20px;
+    background-color: darkgray;
+}
+
+.navv {
+    display: inline-block; /*Задаем блочно-строчное отображение*/
+    width: 180px; /*задаем ширину блока*/
+    background: dodgerblue;
+}
+
+
+ul.hr {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+
+    text-align: center;
+}
+
+    ul.hr li {
+        margin: 15px;
+        display: inline-block; /* Отображать как строчный элемент */
+        margin-right: 15px; /* Отступ слева */
+        border: 1px solid #000; /* Рамка вокруг текста */
+        padding: 3px; /* Поля вокруг текста */
+
+        width: 300px;
+        height: 300px;
+        vertical-align: top;
+    }
+
+
+.myButtons {
+    position: relative;
+    bottom: 0px;
+    border: 1px solid green;
+    height: 100px;
+    width: 300px;
+}

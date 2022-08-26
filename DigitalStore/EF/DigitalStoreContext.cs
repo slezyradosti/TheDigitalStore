@@ -43,11 +43,11 @@ namespace DigitalStore.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //create the multi column index
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.HasIndex(e => new { e.FirstName, e.MidName, e.LastName }).IsUnique();
+            //modelBuilder.Entity<Customer>(entity =>
+            //{
+            //    entity.HasIndex(e => new { e.FirstName, e.MidName, e.LastName }).IsUnique();
 
-            });
+            //});
             //set the cascade options on the relationship
             modelBuilder.Entity<Product>()
                 .HasOne(e => e.Category)
