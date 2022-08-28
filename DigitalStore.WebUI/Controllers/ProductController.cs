@@ -31,19 +31,16 @@ namespace DigitalStore.WebUI.Controllers
                 qry = qry.Where(q => q.ProductName.ToLower().Contains(searchString.ToLower())).AsQueryable();
             }
 
-            switch (sortOrder)
+            qry = sortOrder switch
             {
-                case "Price (descending)":
-                    qry = qry.OrderByDescending(p => p.ProductPrice);
-                    break;
-                default:
-                    qry = qry.OrderBy(p => p.ProductPrice);
-                    break;
-            }
+                "Price descending" => qry.OrderByDescending(p => p.ProductPrice),
+                _ => qry.OrderBy(p => p.ProductPrice),
+            };
 
             var model = PagingList.Create(qry, pageSize, pageIndex);
             model.RouteValue = new RouteValueDictionary {
-                { "searchString", searchString}
+                { "searchString", searchString},
+                { "sortOrder", sortOrder}
             };
             return View(model);
         }

@@ -22,15 +22,18 @@
 *@
     <div class="container p-3">
         <div class="item p-3">
-            <label>Filters:</label>
-            <select class="dropdown" data-bs-toggle="dropdown" name="sortOrder">
-                <option>Price (ascending)</option>
-                <option>Price (descending)</option>
+            <big>Filters:</big>
+            <select class="dropdown" data-bs-toggle="dropdown" id="SortOrderDropDown" name="sortOrder">
+                <option value="Price ascending">Price (ascending)</option>
+                <option value="Price descending">Price (descending)</option>
              </select>
             <input type="text" name="searchString" value="@Model.RouteValue["SearchString"]"/>
              <button type="submit" class="btn btn-primary" style="width:100px">
                 Search
              </button>
+             <a asp-controller="Product" asp-action="Index" asp-route-searchString="" asp-route-sortOrder="Price ascending" class="btn btn-light" style="width:125px">
+                Clear Filters
+             </a>
         </div>
         @foreach (var product in Model)
         {
@@ -60,3 +63,13 @@
 <nav class="pagination">
     @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
 </nav>
+
+<script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+      
+<script type="text/javascript">
+    $(document).ready(()=>{
+        $("#SortOrderDropDown").val(@Json.Serialize(Model.RouteValue["SortOrder"]));
+    });     
+</script>

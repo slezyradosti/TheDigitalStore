@@ -73,14 +73,13 @@ namespace DigitalStore.WebUI.Controllers
         public IActionResult Checkout()
         {
             ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
-            //ViewBag.cities = new SelectList(_cityRepo.GetOne(1));
             return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Checkout(Customer customer)
+        public IActionResult Checkout([Bind("FirstName, MidName, LastName, PhoneNumber, EMail, CityId")] Customer customer)
         {
             if (Cart.Lines.Count() == 0)
             {
