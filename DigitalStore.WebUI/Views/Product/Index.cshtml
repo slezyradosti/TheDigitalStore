@@ -15,11 +15,12 @@
     <vc:pager paging-list="@Model"/>
 </nav>
 
+<div id="PlaceHolderHere">
+    @*<div id="dialogContent" class="modal-dialog"></div>*@
+</div>
+
 <form method="get">
-    @*<nav class="pagination">
-     @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
-</nav>
-*@
+
     <div class="container p-3">
         <div class="item p-3">
             <big>Filters:</big>
@@ -48,9 +49,10 @@
                        </h3>                  
                     </div>
                     <p>@product.ProductDescription</p>
-                    <a asp-controller="Product" asp-action="Buy" asp-route-id="@product.Id" class="btn btn-primary" style="width:125px">
-                        Buy
-                    </a>
+                    @*<a asp-controller="Cart" asp-action="Buy"*@ <button type="button" asp-route-id="@product.Id" class="btn btn-primary" 
+                        data-toggle="ajax-modal" data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart")" style="width:125px">
+                        Quick Buy
+                    </button>
                     <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">
                         Add To Cart
                     </a>
@@ -64,12 +66,15 @@
     @await this.Component.InvokeAsync("Pager", new {pagingList = this.Model})
 </nav>
 
-<script src=
-    "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
+@section scripts
+{
+    <script src=
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
       
-<script type="text/javascript">
-    $(document).ready(()=>{
-        $("#SortOrderDropDown").val(@Json.Serialize(Model.RouteValue["SortOrder"]));
-    });     
-</script>
+    <script type="text/javascript">
+        $(document).ready(()=>{
+            $("#SortOrderDropDown").val(@Json.Serialize(Model.RouteValue["SortOrder"]));
+        });     
+    </script>
+}

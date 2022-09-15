@@ -9,7 +9,9 @@
 <p>Please enter your contact information</p>
 
 <form method="post">
-    <input type="hidden" asp-for=@Model.Timestamp />
+     <input type="hidden" asp-for="City" />
+     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Timestamp" />
     <h3>Your Data</h3>
     <div class="form-group">
         <label asp-for="FirstName"></label>

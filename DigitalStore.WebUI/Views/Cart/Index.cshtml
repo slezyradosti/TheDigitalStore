@@ -27,7 +27,8 @@
                     @((line.Quantity * line.Product.ProductPrice).ToString("# $"))
                 </td>
                 <td class="text-right">
-                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@line.Product.Id" class="btn btn-sm btn-warning" type="submit">Remove</a>
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@line.Product.Id" 
+                    class="btn btn-sm btn-warning" type="submit">Remove</a>
                 </td>
             </tr>
         }

@@ -15,8 +15,8 @@ namespace DigitalStore.WebUI.Controllers
         private readonly IOrderProcessor _orderProcessor;
         private readonly ICityRepo _cityRepo;
         private static Cart Cart = new Cart();
-        
-        public CartController(IProductRepo prepo, ICustomerRepo crepo, ICityRepo cityRepo,IOrderProcessor processor)
+
+        public CartController(IProductRepo prepo, ICustomerRepo crepo, ICityRepo cityRepo, IOrderProcessor processor)
         {
             _productRepo = prepo;
             _customerRepo = crepo;
@@ -106,6 +106,37 @@ namespace DigitalStore.WebUI.Controllers
             //    ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
             //    return View(customer);
             //}
+        }
+
+        public IActionResult Buy(int Id)
+        {
+            var product = _productRepo.GetOne(Id);
+            Cart.Clear();
+            Cart.AddItem(product, 1);
+
+            ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
+            return PartialView("_BuyPartialView");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Buy(Customer customer)
+        {
+            if (Cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "Sorry, your basket is empty!");
+            }
+            customer.City = _cityRepo.GetOne(customer.CityId);
+
+            _customerRepo.Add(customer);
+
+            _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", Cart);
+            var order = _orderProcessor.CreateOrder(customer);
+            _orderProcessor.AddOrderListToDb(Cart, order);
+
+            Cart.Clear();
+            TempData["success"] = "Order processed";
+            return View("Completed");
         }
     }
 }
