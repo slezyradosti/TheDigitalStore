@@ -1,7 +1,4 @@
-﻿body {
-    font-family: "Lato", sans-serif;
-}
-
+﻿
 .sidenavmenu a {
     padding: 8px 8px 8px 12px;
     text-decoration: none;
@@ -18,7 +15,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #E9F0F1;
+    background-color: cornflowerblue;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;

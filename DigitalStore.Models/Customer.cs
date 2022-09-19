@@ -18,7 +18,6 @@ namespace DigitalStore.Models
         [StringLength(25)]
         //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
         public string LastName { get; set; }
-        [Required]
         [StringLength(9, MinimumLength = 9, ErrorMessage = "Phone number must contain 10 digits")]
         public string PhoneNumber { get; set; }
         [Required]

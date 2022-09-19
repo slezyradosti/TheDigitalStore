@@ -24,5 +24,13 @@ namespace DigitalStore.WebUI.Controllers
             var model = PagingList.Create(qry, pageSize, pageIndex);
             return View(model);
         }
+
+        public IActionResult CategoryList(int pageIndex = 1)
+        {
+            int categoriesPageSize = 20;
+            var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(c => c.CategoryName);
+            var model = PagingList.Create(qry, categoriesPageSize, pageIndex);
+            return PartialView("_CategoryListPartialView", model);
+        }
     }
 }

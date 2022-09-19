@@ -10,13 +10,18 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <span style="font-size: 30px; cursor: pointer" onclick="openNavmenu()"><i class="bi bi-list">Menu</i></span>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <span style="font-size: 30px; cursor: pointer" onclick="openNavmenu()"><i class="bi bi-list">Menu</i></span>  
+                <a class="nav-link text-dark" id="cartId" asp-area="" asp-controller="Home" asp-action="Index">
+                     Home
+                </a>
+            </div>
         </div>
     </nav>
     <div class="sidenavmenu" id="adminSidenavnemu">
         <a class="closebtn" href="#" onclick="closeNavmenu()">X</a>
         <br />
-        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="Category" asp-action="CategoryList" class="btn btn-secondary" style="width:220px">
             Categories
         </a>
         <a asp-controller="City" asp-action="Index" class="btn btn-secondary" style="width:220px">
@@ -36,5 +41,9 @@
         </a>
     </div>
 
+    <div id="modelList"></div>
+
+
     <script type="text/javascript" src="~/js/sideMenu.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 </body>
