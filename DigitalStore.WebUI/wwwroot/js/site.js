@@ -29,6 +29,13 @@ $(function () {
             PlaceHolderElement.find('.modal').modal('hide');
         })
     })
+
+    //for preson (admin view)
+    var PlaceHolderElement1 = $('#modelList');
+    $('a[data-toggle="ajax-modal"]').click(function (event) {
+        var url = $(this).data('url');
+        PlaceHolderElement1.load(url);
+    })
 })
 
 showInPopup = (url, title) => {
