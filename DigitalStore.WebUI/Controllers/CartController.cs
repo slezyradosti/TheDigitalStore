@@ -110,9 +110,13 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Buy(int Id)
         {
-            var product = _productRepo.GetOne(Id);
-            Cart.Clear();
-            Cart.AddItem(product, 1);
+            Product product = _productRepo.GetOne(Id);
+
+            if (product != null)
+            {
+                Cart.Clear();
+                Cart.AddItem(product, 1);
+            }
 
             ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
             return PartialView("_BuyPartialView");

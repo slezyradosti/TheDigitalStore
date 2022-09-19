@@ -49,8 +49,8 @@
                        </h3>                  
                     </div>
                     <p>@product.ProductDescription</p>
-                    @*<a asp-controller="Cart" asp-action="Buy"*@ <button type="button" asp-route-id="@product.Id" class="btn btn-primary" 
-                        data-toggle="ajax-modal" data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart")" style="width:125px">
+                    @*<a asp-controller="Cart" asp-action="Buy"*@ <button type="button" class="btn btn-primary" data-toggle="ajax-modal" 
+                    data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart",  new {Id = product.Id} )" style="width:125px">
                         Quick Buy
                     </button>
                     <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">

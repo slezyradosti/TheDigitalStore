@@ -12,12 +12,20 @@ $(function () {
         })
     })
 
+    //PlaceHolderElement.on('click', 'button[data-dismiss="modal"]', function (event) {
+    //    var form = $(this).parents('.modal').find('form');
+    //    var actionUrl = form.attr('action');
+    //    var url = actionUrl;
+    //    var sendData = form.serialize();
+    //    $.post(url, sendData).done(function (data) {
+    //        PlaceHolderElement.find('.modal').modal('hide');
+    //    })
+    //})
+
     PlaceHolderElement.on('click', 'button[data-dismiss="modal"]', function (event) {
         var form = $(this).parents('.modal').find('form');
-        var actionUrl = form.attr('action');
-        var url = actionUrl;
-        var sendData = form.serialize();
-        $.post(url, sendData).done(function(data){
+        var url = form.attr('action');
+        $.get(url).done(function (data) {
             PlaceHolderElement.find('.modal').modal('hide');
         })
     })

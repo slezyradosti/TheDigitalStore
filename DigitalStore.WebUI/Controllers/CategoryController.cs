@@ -11,6 +11,8 @@ namespace DigitalStore.WebUI.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryRepo _repo;
+        private const int pageSize = 10;
+
         public CategoryController(ICategoryRepo repo)
         {
             _repo = repo;
@@ -18,8 +20,6 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Index(int pageIndex = 1)
         {
-            int pageSize = 10;
-            //var objProductList = _repo.GetAll();
             var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(c => c.CategoryName);
             var model = PagingList.Create(qry, pageSize, pageIndex);
             return View(model);
