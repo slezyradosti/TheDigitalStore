@@ -32,5 +32,106 @@ namespace DigitalStore.WebUI.Controllers
             var model = PagingList.Create(qry, categoriesPageSize, pageIndex);
             return View(model);
         }
+
+        public IActionResult Edit(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+
+            var category =_repo.GetOne(Id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _repo.Update(category);
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    ModelState.AddModelError(string.Empty,
+                        $@"Unable to save the record. Another user has updated it. {ex.Message}");
+                    return View(category);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, $@"Unable to save the record. {ex.Message}");
+                    return View(category);
+                }
+                return RedirectToAction("CategoryList");
+            }
+            return View(category);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var category = _repo.GetOne(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([Bind("Id,Timestamp")] Category category)
+        {
+            try
+            {
+                _repo.Delete(category);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                ModelState.AddModelError(string.Empty,
+                    $@"Unable to delete record. Another user updated the record. {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
+            }
+            return RedirectToAction("CategoryList");
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category category)
+        {
+            ModelState.Remove("Timestamp"); // why Bind[] is not working?
+            if (!ModelState.IsValid) return View(category);
+            try
+            {
+                _repo.Add(category);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
+                return View(category);
+            }
+            return RedirectToAction("CategoryList");
+        }
     }
 }
