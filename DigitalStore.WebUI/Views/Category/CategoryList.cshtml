@@ -7,10 +7,6 @@
     Layout = "../Shared/_PersonLayout";
 }
 
-@{
-	//Html.RenderPartial("../Person/_SideMenuPartialView");
-}
-
 <nav class="pagination">
     <vc:pager paging-list="@Model"/>
 </nav>
@@ -58,12 +54,5 @@
 </div>
 
 <nav class="pagination">
-    <vc:pager paging-list="@Model" action="CategoryList"/>
+    <vc:pager paging-list="@Model"/>
 </nav>
-
-@section scripts
-{
-    <script src=
-        "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-    </script>
-}

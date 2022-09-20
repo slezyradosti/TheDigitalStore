@@ -6,17 +6,21 @@ using Microsoft.EntityFrameworkCore;
 using DigitalStore.Models;
 using DigitalStore.Repos;
 using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DigitalStore.WebUI.Controllers
 {
     public class ProductController : Controller
     {
         private readonly IProductRepo _repo;
-        private const int pageSize = 5; 
+        private readonly ICategoryRepo _categoryRepo;
+        private const int pageSize = 5;
+        private const int productsPageSize = 15;
 
-        public ProductController(IProductRepo repo)
+        public ProductController(IProductRepo repo, ICategoryRepo categoryRepo)
         {
             _repo = repo;
+            _categoryRepo = categoryRepo;
         }
 
         public IActionResult Index(int? id, string sortOrder, string searchString, int pageIndex = 1)
@@ -95,18 +99,19 @@ namespace DigitalStore.WebUI.Controllers
             {
                 return NotFound();
             }
+            ViewBag.categories = new SelectList(_categoryRepo.GetAll(), "Id", "CategoryName");
             return View(inventory);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ProductName,ProductPrice,CategoryId,Id,Timestamp")] Product product)
+        public IActionResult Edit(int id, Product product)
         {
             if (id != product.Id)
             {
                 return BadRequest();
             }
-            if (!ModelState.IsValid) return View(product);
+            //if (!ModelState.IsValid) return View(product);
             try
             {
                 _repo.Update(product);
@@ -122,7 +127,7 @@ namespace DigitalStore.WebUI.Controllers
                 ModelState.AddModelError(string.Empty, $@"Unable to save the record. {ex.Message}");
                 return View(product);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ProductList));
         }
 
         public IActionResult Delete(int? id)
@@ -163,9 +168,11 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult ProductList(int pageIndex = 1)
         {
-            int productsPageSize = 20;
             var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(p => p.ProductName);
             var model = PagingList.Create(qry, productsPageSize, pageIndex);
+
+            ViewBag.categories = new SelectList(_categoryRepo.GetAll(), "Id", "CategoryName");
+            model.Action = nameof(ProductList);
             return View(model);
         }
     }
