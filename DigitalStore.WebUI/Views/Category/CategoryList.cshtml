@@ -1,13 +1,19 @@
 ﻿@using DigitalStore.Models
-@model IEnumerable<Category>
+@model ReflectionIT.Mvc.Paging.PagingList<Category>
+@using ReflectionIT.Mvc.Paging
+@addTagHelper *, ReflectionIT.Mvc.Paging
 
 @{
-    Layout = null;
+    Layout = "../Shared/_PersonLayout";
 }
 
 @{
-	Html.RenderPartial("../Person/_SideMenuPartialView");
+	//Html.RenderPartial("../Person/_SideMenuPartialView");
 }
+
+<nav class="pagination">
+    <vc:pager paging-list="@Model"/>
+</nav>
 
 <div class="container p-3">
 <table class="table table-bordered table-striped" style="width:100%">
@@ -50,3 +56,14 @@
 	</tbody>
 </table>
 </div>
+
+<nav class="pagination">
+    <vc:pager paging-list="@Model" action="CategoryList"/>
+</nav>
+
+@section scripts
+{
+    <script src=
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+}

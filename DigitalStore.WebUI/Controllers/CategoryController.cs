@@ -18,18 +18,17 @@ namespace DigitalStore.WebUI.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index(int pageIndex = 1)
-        {
-            var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(c => c.CategoryName);
-            var model = PagingList.Create(qry, pageSize, pageIndex);
-            return View(model);
+        public IActionResult Index()
+        {   
+            return View();
         }
 
         public IActionResult CategoryList(int pageIndex = 1)
         {
-            int categoriesPageSize = 20;
+            int categoriesPageSize = 1;
             var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(c => c.CategoryName);
             var model = PagingList.Create(qry, categoriesPageSize, pageIndex);
+            model.Action = nameof(CategoryList);
             return View(model);
         }
 
@@ -118,9 +117,9 @@ namespace DigitalStore.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public IActionResult Create([Bind("CategoryName")] Category category)
         {
-            ModelState.Remove("Timestamp"); // why Bind[] is not working?
+            ModelState.Remove("Timestamp"); // why Bind[] is not working? or?
             if (!ModelState.IsValid) return View(category);
             try
             {

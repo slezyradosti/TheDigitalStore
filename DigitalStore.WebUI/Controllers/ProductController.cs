@@ -160,5 +160,13 @@ namespace DigitalStore.WebUI.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult ProductList(int pageIndex = 1)
+        {
+            int productsPageSize = 20;
+            var qry = _repo.GetAll().AsQueryable().AsNoTracking().OrderBy(p => p.ProductName);
+            var model = PagingList.Create(qry, productsPageSize, pageIndex);
+            return View(model);
+        }
     }
 }
