@@ -67,24 +67,27 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.categories = new SelectList(_categoryRepo.GetAll(), "Id", "CategoryName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ProductName,ProductPrice,CategoryId")] Product product)
+        public IActionResult Create([Bind("ProductName,ProductPrice,ProductDescription,CategoryId")] Product product, IFormFile image)
         {
-            if (!ModelState.IsValid) return View(product);
+            //if (!ModelState.IsValid) return View(product); //bind???
             try
             {
+                product.ProductImage = ImageConvertor.ConvetrImageToByteArray(image);
                 _repo.Add(product);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
+                ViewBag.categories = new SelectList(_categoryRepo.GetAll(), "Id", "CategoryName");
                 return View(product);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ProductList));
         }
 
         public IActionResult Edit(int? id)

@@ -14,7 +14,7 @@
 <div class="container p-3">
 <table class="table table-bordered table-striped" style="width:100%">
 	<div class="col-12 text-end">
-			<a asp-controller="Category" asp-action="Create" class="btn btn-primary" style="width:100px">
+			<a asp-controller="Product" asp-action="Create" class="btn btn-primary" style="width:100px">
 				<i class="bi bi-plus-square"></i> &nbsp; Create
 			</a>
 	</div>
@@ -31,6 +31,9 @@
 			</th>
 			<th>
 				Product Description
+			</th>
+			<th>
+				Product Image
 			</th>
 			<th>
 				Category Name
@@ -55,6 +58,9 @@
 					@obj.ProductDescription
 				</td>
 				<td width="15%">
+					<img src="@ImageConvertor.ConvetrByteArrayToString(obj.ProductImage)" style="max-width: 150px; max-height: 120px"/>
+				</td>
+				<td width="10%">
 					@obj.Category.CategoryName
 				</td>
 				<td>

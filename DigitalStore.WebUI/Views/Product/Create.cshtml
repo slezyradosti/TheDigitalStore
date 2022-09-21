@@ -4,45 +4,48 @@
 @{
     Layout = "../Shared/_PersonLayout";
 }
+<div class="container p-3">
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Create Product</h2>
+                <hr/>
+            </div>
+            <div class="mb-3">
+                <p></><label asp-for="ProductName"></label></p>
+                <input asp-for="ProductName" class="form-contorl" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <p><label asp-for="ProductPrice"></label></p>
+                <input asp-for="ProductPrice" class="form-contorl" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <p><label asp-for="ProductDescription"></label></p>
+                <input asp-for="ProductDescription" class="form-contorl" />
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                  <p><label asp-for="ProductImage"></label></p>
+                   <input asp-for="ProductImage" type="file" name="image" accept="image/*" class="form-contorl" />
+             </div>
+             <div class="form-group">
+                   <label asp-for="Category.CategoryName"></label>
+                   <select asp-for="CategoryId" asp-items="ViewBag.categories" class ="form-control"></select>        
+             </div>
+             <br />
+            <button type="submit" class="btn btn-primary" style="width:150px">
+                Create
+            </button>
+            <a asp-controller="Product" asp-action="ProductList" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>
 
-<form method="post">
-    <input asp-for="Id" hidden />
-    <input asp-for="CategoryId" hidden />
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">Create Product</h2>
-            <hr/>
-        </div>
-        <div class="mb-3">
-            <p></><label asp-for="ProductName"></label></p>
-            <input asp-for="ProductName" class="form-contorl" />
-            <span asp-validation-for="ProductName" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <p><label asp-for="ProductPrice"></label></p>
-            <input asp-for="ProductPrice" class="form-contorl" />
-            <span asp-validation-for="ProductPrice" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <p><label asp-for="ProductDescription"></label></p>
-            <input asp-for="ProductDescription" class="form-contorl" />
-            <span asp-validation-for="ProductDescription" class="text-danger"></span>
-        </div>
-         <div class="form-group">
-               <label asp-for="Category.CategoryName"></label>
-               <select asp-for="CategoryId" asp-items="ViewBag.categories" class = "form-control"></select>        
-         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">
-            Create
-        </button>
-    </div>
-</form>
-
-<a asp-controller="Product" asp-action="Index" asp-route-id="@Model.CategoryId" class="btn btn-secondary" style="width:150px">
-    Back to List
-</a>
-
-@*Standard data validation will be performed on the client side, not on the server*@
 @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />

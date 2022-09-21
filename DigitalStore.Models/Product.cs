@@ -18,6 +18,7 @@ namespace DigitalStore.Models
         [StringLength(300)]
         [Display(Name = "Product Description")]
         public string ProductDescription { get; set; }
+        public byte[] ProductImage { get; set; }
         public List<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
         [ForeignKey(nameof(CategoryId))]
