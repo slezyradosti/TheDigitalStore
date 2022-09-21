@@ -7,10 +7,11 @@ using DigitalStore.Models;
 using DigitalStore.Repos;
 using ReflectionIT.Mvc.Paging;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using DigitalStore.WebUI.ExtensionClasses;
 
 namespace DigitalStore.WebUI.Controllers
 {
-    public class ProductController : Controller
+	public class ProductController : Controller
     {
         private readonly IProductRepo _repo;
         private readonly ICategoryRepo _categoryRepo;

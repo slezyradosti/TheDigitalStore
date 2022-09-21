@@ -3,18 +3,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DigitalStore.Models;
 using DigitalStore.Repos;
 using DigitalStore.Models.NotForDB;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Web;
+using DigitalStore.WebUI.ExtensionClasses;
 
 namespace DigitalStore.WebUI.Controllers
 {
-    public class CartController : Controller
+	public class CartController : Controller
     {
         private readonly IProductRepo _productRepo;
         private readonly ICustomerRepo _customerRepo;
         private readonly IOrderProcessor _orderProcessor;
         private readonly ICityRepo _cityRepo;
-        private static Cart Cart = new Cart();
+        //private static Cart Cart = new Cart();
 
         public CartController(IProductRepo prepo, ICustomerRepo crepo, ICityRepo cityRepo, IOrderProcessor processor)
         {
@@ -26,13 +25,8 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Index(string returnUrl)
         {
-            //return View(new CartIndexViewModel
-            //{
-            //    Cart = GetCart(),
-            //    ReturnUrl = returnUrl
-            //});
             ViewBag.Title = "My Title";
-            return View(Cart);
+            return View(GetCart());
         }
 
         public IActionResult AddToCart(int Id, string returnUrl)
@@ -40,8 +34,10 @@ namespace DigitalStore.WebUI.Controllers
             Product product = _productRepo.GetOne(Id);
 
             if (product != null)
-            {
-                Cart.AddItem(product, 1); // Cart = GetCart()
+			{
+				var cart = GetCart();
+                AddItemToCart(cart, product);
+
                 TempData["success"] = "Product added to Cart";
             }
             return RedirectToAction("Index");
@@ -53,22 +49,32 @@ namespace DigitalStore.WebUI.Controllers
 
             if (product != null)
             {
-                Cart.RemoveLine(product); // Cart = GetCart()
+                var cart = GetCart();
+                RemovetemToCart(cart, product);
+
                 TempData["success"] = "Product removed from Cart";
             }
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        //public byte[] GetCart()
-        //{
-        //    HttpContext.Session.TryGetValue("Cart", out byte[] cart); //HttpContext.Current.Session["Cart"];
-        //    if (cart == null)
-        //    {
-        //        cart = new byte[1];
-        //        HttpContext.Session.Set("Cart", cart);
-        //    }
-        //    return cart;
-        //}
+        public Cart GetCart()
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<Cart>("Cart");
+            if (cart == null)
+            {
+                cart = new Cart();
+                HttpContext.Session.SetObjectAsJson("Cart", cart);
+            }
+            return cart;
+        }
+
+        public void SetCart(Cart cart)
+        {
+            if (cart != null)
+            { 
+                HttpContext.Session.SetObjectAsJson("Cart", cart);
+            }
+        }
 
         public IActionResult Checkout()
         {
@@ -81,7 +87,8 @@ namespace DigitalStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Checkout([Bind("FirstName, MidName, LastName, PhoneNumber, EMail, CityId")] Customer customer)
         {
-            if (Cart.Lines.Count() == 0)
+            var cart = GetCart();
+            if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry, your basket is empty!");
             }
@@ -93,11 +100,11 @@ namespace DigitalStore.WebUI.Controllers
             //добавляю неавторизованного покупателя
             _customerRepo.Add(customer);
 
-            _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", Cart);
+            _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", GetCart());
             var order = _orderProcessor.CreateOrder(customer);
-            _orderProcessor.AddOrderListToDb(Cart, order);
+            _orderProcessor.AddOrderListToDb(GetCart(), order);
 
-            Cart.Clear();
+            ClearCart(cart);
             TempData["success"] = "Order processed";
             return View("Completed");
             //}
@@ -114,8 +121,9 @@ namespace DigitalStore.WebUI.Controllers
 
             if (product != null)
             {
-                Cart.Clear();
-                Cart.AddItem(product, 1);
+                var cart = GetCart();
+                ClearCart(cart);
+                AddItemToCart(cart, product);
             }
 
             ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
@@ -126,7 +134,8 @@ namespace DigitalStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Buy(Customer customer)
         {
-            if (Cart.Lines.Count() == 0)
+            var cart = GetCart();
+            if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Sorry, your basket is empty!");
             }
@@ -134,13 +143,31 @@ namespace DigitalStore.WebUI.Controllers
 
             _customerRepo.Add(customer);
 
-            _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", Cart);
+            _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", GetCart());
             var order = _orderProcessor.CreateOrder(customer);
-            _orderProcessor.AddOrderListToDb(Cart, order);
+            _orderProcessor.AddOrderListToDb(GetCart(), order);
 
-            Cart.Clear();
+            ClearCart(cart);
             TempData["success"] = "Order processed";
             return View("Completed");
         }
+
+        //for minimized code (better?)
+        public void AddItemToCart(Cart cart, Product product)
+		{
+            cart.AddItem(product, 1);
+            SetCart(cart);
+        }
+        public void RemovetemToCart(Cart cart, Product product)
+        {
+            cart.AddItem(product, 1);
+            SetCart(cart);
+        }
+        public void ClearCart(Cart cart)
+        {
+            cart.Clear();
+            SetCart(cart);
+        }
+
     }
 }
