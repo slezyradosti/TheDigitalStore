@@ -1,10 +1,10 @@
 ﻿@using DigitalStore.Models
+@using DigitalStore.WebUI.ExtensionClasses
 @model Product
 
  <div class="item p-3">
     <div class="oneItem">
         <div class="forPrice">
-            @*Сюда еще добавить изображение*@
             @Model.ProductPrice.ToString("# $")
         </div>
         <div class="forName">  
@@ -12,6 +12,8 @@
                 <a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="link page-link">@Model.ProductName</a>
             </h3>                  
         </div>
+        <img src="@ImageConvertor.ConvetrByteArrayToString(Model.ProductImage)" style="max-width: 550px; max-height: 350px"/>
+        <br/>
         <p>@Model.ProductDescription</p>
         <a asp-controller="Product" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary" style="width:125px">
             Buy
