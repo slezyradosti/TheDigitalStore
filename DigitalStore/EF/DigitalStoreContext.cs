@@ -1,11 +1,13 @@
 ﻿using System;
+using DigitalStore.Identity;
 using DigitalStore.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace DigitalStore.EF
 {
-    public class DigitalStoreContext : DbContext
+    public class DigitalStoreContext : IdentityDbContext<ApplicationUser>
     {
         public DigitalStoreContext()
         {
@@ -78,6 +80,9 @@ namespace DigitalStore.EF
                 .HasOne(e => e.City)
                 .WithMany(e => e.Customers)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // for Identity
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

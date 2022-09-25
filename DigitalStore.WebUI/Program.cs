@@ -7,14 +7,22 @@ using Microsoft.Extensions.DependencyInjection;
 using DigitalStore.Repos.Interfaces;
 using DigitalStore.BusinessLogic.Interfaces;
 using DigitalStore.BusinessLogic;
+using Microsoft.AspNetCore.Identity;
+using DigitalStore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<DigitalStoreContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+    options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<DigitalStoreContext>();
+
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddPaging();
 builder.Services.AddScoped<IProductRepo, ProductRepo>();
@@ -52,8 +60,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseSession();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
