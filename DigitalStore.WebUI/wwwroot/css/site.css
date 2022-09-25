@@ -151,3 +151,7 @@ button.accept-policy {
     border: 0;
     background-color: white;
 }
+
+#shiftLeft {
+    left: -115px;
+}

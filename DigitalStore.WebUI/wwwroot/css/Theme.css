@@ -3470,7 +3470,7 @@ textarea.form-control-lg {
     --bs-dropdown-header-color: #888;
     --bs-dropdown-header-padding-x: 1rem;
     --bs-dropdown-header-padding-y: 0.5rem;
-    position: absolute;
+    position: relative;
     z-index: 1000;
     display: none;
     min-width: var(--bs-dropdown-min-width);
@@ -3488,7 +3488,8 @@ textarea.form-control-lg {
 
     .dropdown-menu[data-bs-popper] {
         top: 100%;
-        left: 0;
+        left: auto;
+        position: relative;
         margin-top: var(--bs-dropdown-spacer)
     }
 

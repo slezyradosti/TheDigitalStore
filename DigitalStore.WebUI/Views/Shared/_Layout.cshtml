@@ -31,7 +31,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  asp-area="" asp-controller="Category" asp-action="Index" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"  asp-area="" asp-controller="Category" 
+                          asp-action="Index" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                           <div class="dropdown-menu">
                             @await Component.InvokeAsync("Category")
                            
@@ -44,9 +45,16 @@
                     <a class="nav-link text-dark" id="cartId" asp-area="" asp-controller="Cart" asp-action="Index">
                         <i class="bi bi-basket3"></i>
                     </a>
-                    <a class="nav-link text-dark" id="cartId" asp-area="" asp-controller="Person" asp-action="Index">
+                    @*<a class="nav-link text-dark" id="cartId" asp-area="" asp-controller="Person" asp-action="Index">
                         <i class="bi bi-person-square"></i>
-                    </a>
+                    </a>*@
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" asp-area="" 
+                          role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-square"></i></a>                
+                          <div class="dropdown-menu" id="shiftLeft">
+                           <partial name="../Shared/Components/Login/_LoginPartial" />
+                      </div>
+                     </li>
                 </div>
             </div>
         </nav>
