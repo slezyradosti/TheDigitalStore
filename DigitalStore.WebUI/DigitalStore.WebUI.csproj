@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DigitalStore.BusinessLogic\DigitalStore.BusinessLogic.csproj" />
     <ProjectReference Include="..\DigitalStore\DigitalStore.csproj" />
   </ItemGroup>
 

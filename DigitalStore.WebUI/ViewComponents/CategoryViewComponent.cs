@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DigitalStore.Repos;
+using DigitalStore.Repos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 

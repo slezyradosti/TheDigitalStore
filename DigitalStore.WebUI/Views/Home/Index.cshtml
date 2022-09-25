@@ -27,10 +27,12 @@
         </div>
         <p>@product.ProductDescription</p>
         <div class="myButtons">
-            <a asp-controller="Product" asp-action="Buy" asp-route-id="@product.Id" class="btn btn-primary" style="width:125px">
-                 Buy
-            </a>
-            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" 
+                    data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart",  new {Id = product.Id} )" style="width:125px">
+                        Quick Buy
+            </button>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" asp-route-returnUrl="@Context.Request.Path"
+            class="btn btn-secondary" style="width:125px">
                  Add To Cart
             </a>
         </div>

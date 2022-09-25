@@ -53,7 +53,8 @@
                     data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart",  new {Id = product.Id} )" style="width:125px">
                         Quick Buy
                     </button>
-                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-secondary" style="width:125px">
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" asp-route-returnUrl="@Context.Request.Path"
+                    class="btn btn-secondary" style="width:125px">
                         Add To Cart
                     </a>
                 </div>     

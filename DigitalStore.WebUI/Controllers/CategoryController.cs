@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DigitalStore.Models;
-using DigitalStore.Repos;
 using ReflectionIT.Mvc.Paging;
-
+using DigitalStore.Repos.Interfaces;
 
 namespace DigitalStore.WebUI.Controllers
 {

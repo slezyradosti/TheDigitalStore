@@ -4,6 +4,9 @@ using DigitalStore.Models.NotForDB;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 using Microsoft.Extensions.DependencyInjection;
+using DigitalStore.Repos.Interfaces;
+using DigitalStore.BusinessLogic.Interfaces;
+using DigitalStore.BusinessLogic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +26,8 @@ builder.Services.AddScoped<IProductOrderRepo, ProductOrderRepo>();
 builder.Services.AddScoped<ICityRepo, CityRepo>();
 builder.Services.AddScoped<EmailSettings, EmailSettings>();
 builder.Services.AddTransient<IOrderProcessor, EmailOrderProcessor>();
+builder.Services.AddTransient<IProductOrderLogic, ProductOrderLogic>();
+builder.Services.AddTransient<IOrderLogic, OrderLogic>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

@@ -1,32 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DigitalStore.Models;
-using DigitalStore.Repos;
 using DigitalStore.Models.NotForDB;
 using DigitalStore.WebUI.ExtensionClasses;
+using DigitalStore.Repos.Interfaces;
+using DigitalStore.BusinessLogic.Interfaces;
 
 namespace DigitalStore.WebUI.Controllers
 {
-	public class CartController : Controller
+    public class CartController : Controller
     {
         private readonly IProductRepo _productRepo;
         private readonly ICustomerRepo _customerRepo;
         private readonly IOrderProcessor _orderProcessor;
         private readonly ICityRepo _cityRepo;
-        //private static Cart Cart = new Cart();
+        private readonly IOrderLogic _orderLogic;
+        private readonly IProductOrderLogic _productOrderLogic;
 
-        public CartController(IProductRepo prepo, ICustomerRepo crepo, ICityRepo cityRepo, IOrderProcessor processor)
+        public CartController(IProductRepo prepo, ICustomerRepo crepo, ICityRepo cityRepo, 
+            IOrderProcessor processor, IOrderLogic orderLogic, IProductOrderLogic productOrderLogic)
         {
             _productRepo = prepo;
             _customerRepo = crepo;
             _orderProcessor = processor;
             _cityRepo = cityRepo;
-        }
-
-        public IActionResult Index(string returnUrl)
-        {
-            ViewBag.Title = "My Title";
-            return View(GetCart());
+            _orderLogic = orderLogic;
+            _productOrderLogic = productOrderLogic;
         }
 
         public IActionResult AddToCart(int Id, string returnUrl)
@@ -40,7 +39,7 @@ namespace DigitalStore.WebUI.Controllers
 
                 TempData["success"] = "Product added to Cart";
             }
-            return RedirectToAction("Index");
+            return LocalRedirect(returnUrl); 
         }
 
         public IActionResult RemoveFromCart(int Id, string returnUrl)
@@ -54,7 +53,7 @@ namespace DigitalStore.WebUI.Controllers
 
                 TempData["success"] = "Product removed from Cart";
             }
-            return RedirectToAction("Index", new { returnUrl });
+            return LocalRedirect(returnUrl);
         }
 
         public Cart GetCart()
@@ -93,16 +92,14 @@ namespace DigitalStore.WebUI.Controllers
                 ModelState.AddModelError("", "Sorry, your basket is empty!");
             }
 
-            customer.City = _cityRepo.GetOne(customer.CityId);
-
             //if (ModelState.IsValid) // obj City and Timestamp Invalid. WHY????????
             //{
             //добавляю неавторизованного покупателя
             _customerRepo.Add(customer);
 
             _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", GetCart());
-            var order = _orderProcessor.CreateOrder(customer);
-            _orderProcessor.AddOrderListToDb(GetCart(), order);
+            var order = _orderLogic.CreateOrder(customer);
+            _productOrderLogic.AddOrderListToDb(GetCart(), order);
 
             ClearCart(cart);
             TempData["success"] = "Order processed";
@@ -144,8 +141,8 @@ namespace DigitalStore.WebUI.Controllers
             _customerRepo.Add(customer);
 
             _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", GetCart());
-            var order = _orderProcessor.CreateOrder(customer);
-            _orderProcessor.AddOrderListToDb(GetCart(), order);
+            var order = _orderLogic.CreateOrder(customer);
+            _productOrderLogic.AddOrderListToDb(GetCart(), order);
 
             ClearCart(cart);
             TempData["success"] = "Order processed";
@@ -160,7 +157,7 @@ namespace DigitalStore.WebUI.Controllers
         }
         public void RemovetemToCart(Cart cart, Product product)
         {
-            cart.AddItem(product, 1);
+            cart.RemoveLine(product);
             SetCart(cart);
         }
         public void ClearCart(Cart cart)
@@ -168,6 +165,5 @@ namespace DigitalStore.WebUI.Controllers
             cart.Clear();
             SetCart(cart);
         }
-
     }
 }
