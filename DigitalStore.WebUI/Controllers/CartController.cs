@@ -28,6 +28,12 @@ namespace DigitalStore.WebUI.Controllers
             _productOrderLogic = productOrderLogic;
         }
 
+        public IActionResult Index(string returnUrl)
+        {
+            ViewBag.Title = "My Title";
+            return View(GetCart());
+        }
+
         public IActionResult AddToCart(int Id, string returnUrl)
         {
             Product product = _productRepo.GetOne(Id);
@@ -53,7 +59,7 @@ namespace DigitalStore.WebUI.Controllers
 
                 TempData["success"] = "Product removed from Cart";
             }
-            return LocalRedirect(returnUrl);
+            return RedirectToAction(nameof(Index));
         }
 
         public Cart GetCart()
