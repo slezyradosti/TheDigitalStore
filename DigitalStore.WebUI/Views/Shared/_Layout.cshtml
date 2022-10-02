@@ -48,13 +48,15 @@
                     @*<a class="nav-link text-dark" id="cartId" asp-area="" asp-controller="Person" asp-action="Index">
                         <i class="bi bi-person-square"></i>
                     </a>*@
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" asp-area="" 
-                          role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-square"></i></a>                
-                          <div class="dropdown-menu" id="shiftLeft">
-                           <partial name="../Shared/Components/Login/_LoginPartial" />
-                      </div>
-                     </li>
+                    <ul class="navbar-nav ">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" asp-area="" 
+                              role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-square"></i></a>                
+                              <div class="dropdown-menu" id="shiftLeft">
+                                <partial name="../Shared/Components/Login/_LoginPartial" />
+                              </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
