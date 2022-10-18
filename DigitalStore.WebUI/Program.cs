@@ -23,6 +23,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DigitalStoreContext>();
 
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>();
+
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddPaging();
 builder.Services.AddScoped<IProductRepo, ProductRepo>();
@@ -68,5 +70,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

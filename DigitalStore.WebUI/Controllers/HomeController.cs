@@ -18,8 +18,15 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Index()
         {
-            var randomList = _repo.GetTenRandomItems(6);
-            return View(randomList);
+            try
+            {
+                var randomList = _repo.GetTenRandomItems(6);
+                return View(randomList);
+            }
+            catch(Exception ex)
+            {
+                return View(null);
+            }
         }
 
         public IActionResult Privacy()

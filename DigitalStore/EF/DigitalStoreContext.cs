@@ -34,7 +34,7 @@ namespace DigitalStore.EF
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = @"server=DESKTOP-QT7HQTJ;database=DigitalStore;integrated security=True;
+                var connectionString = @"server=LAPTOP-GQRGKLN2;database=DigitalStore;integrated security=True;
                     MultipleActiveResultSets=True;App=EntityFramework;";
                 optionsBuilder.UseSqlServer(
                     connectionString,
