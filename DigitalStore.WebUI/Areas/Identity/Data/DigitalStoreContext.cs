@@ -4,7 +4,7 @@
 
 //namespace DigitalStore.EF;
 
-//public class DigitalStoreContext : IdentityDbContext<IdentityUser>
+//public class DigitalStoreContext : IdentityDbContext<ApplicationUser>
 //{
 //    public DigitalStoreContext(DbContextOptions<DigitalStoreContext> options)
 //        : base(options)
