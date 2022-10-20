@@ -8,9 +8,11 @@ using ReflectionIT.Mvc.Paging;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DigitalStore.WebUI.ExtensionClasses;
 using DigitalStore.Repos.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DigitalStore.WebUI.Controllers
 {
+    [Authorize("CanUseAdminPanel")]
     public class ProductController : Controller
     {
         private readonly IProductRepo _repo;
@@ -24,6 +26,7 @@ namespace DigitalStore.WebUI.Controllers
             _categoryRepo = categoryRepo;
         }
 
+        [AllowAnonymous]
         public IActionResult Index(int? id, string sortOrder, string searchString, int pageIndex = 1)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -50,6 +53,7 @@ namespace DigitalStore.WebUI.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int? id)
         {
             if (id == null)

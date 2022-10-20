@@ -45,6 +45,13 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanUseAdminPanel",
+    policyBuilder => policyBuilder
+    .RequireClaim("Root"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

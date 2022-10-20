@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using DigitalStore.Models;
 using ReflectionIT.Mvc.Paging;
 using DigitalStore.Repos.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DigitalStore.WebUI.Controllers
 {
+    [Authorize("CanUseAdminPanel")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepo _repo;
@@ -18,6 +20,7 @@ namespace DigitalStore.WebUI.Controllers
             _repo = repo;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {   
             return View();
