@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DigitalStore.Identity;
+using DigitalStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,13 +19,17 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IAuthorizationService _authService;
+        public bool CanUseAdminPanel { get; set; }
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IAuthorizationService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _authService = authService;
         }
 
         /// <summary>
@@ -81,6 +87,10 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            var isAuthorised = await _authService
+                .AuthorizeAsync(User, "CanUseAdminPanel");
+            CanUseAdminPanel = isAuthorised.Succeeded;
 
             await LoadAsync(user);
             return Page();
