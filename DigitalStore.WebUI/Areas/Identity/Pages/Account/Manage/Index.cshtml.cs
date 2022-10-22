@@ -7,11 +7,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DigitalStore.Identity;
+using DigitalStore.Identity.Initialization;
 using DigitalStore.Models;
+using DigitalStore.WebUI.ExtensionClasses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
 {
@@ -19,16 +22,26 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthorizationService _authService;
-        public bool CanUseAdminPanel { get; set; }
+        public bool CanUseAdminPanel
+        {
+            get => _ManageNav.CanUseAdminPanel;
+            set
+            {
+                _ManageNav.CanUseAdminPanel = value;
+            }
+        }
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            //RoleManager<IdentityRole> roleManager,
             IAuthorizationService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            //_roleManager = roleManager;
             _authService = authService;
         }
 
@@ -88,12 +101,22 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var isAuthorised = await _authService
-                .AuthorizeAsync(User, "CanUseAdminPanel");
-            CanUseAdminPanel = isAuthorised.Succeeded;
+            //await RoleInitializer.InitializeAsync(_userManager, _roleManager);
+
+            //var isAuthorised = await _authService
+            //    .AuthorizeAsync(User, "CanUseAdminPanel");
+            //CanUseAdminPanel = isAuthorised.Succeeded;
+            //CanUseAdminPanel = isAuthorised.Succeeded; //cant use bacause model on view is conflict
 
             await LoadAsync(user);
             return Page();
+        }
+
+        public async void isAuthorised()
+        {
+            var isAuthorised = await _authService
+                .AuthorizeAsync(User, "CanUseAdminPanel");
+            CanUseAdminPanel = isAuthorised.Succeeded;
         }
 
         public async Task<IActionResult> OnPostAsync()

@@ -1,12 +1,12 @@
 ﻿@using DigitalStore.Identity
-@model IndexModel
+@using DigitalStore.WebUI.ExtensionClasses
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 <ul class="nav nav-pills flex-column">
-    @*здесь добавить условие для роли админа*@
-    @if (Model.CanUseAdminPanel)
+    @*cannot use model*@
+    @if (_ManageNav.CanUseAdminPanel)
     {
     <li class="nav-item"><a class="nav-link " id="profile" 
         asp-controller="Person" asp-action="Index">Admin Panel</a></li>

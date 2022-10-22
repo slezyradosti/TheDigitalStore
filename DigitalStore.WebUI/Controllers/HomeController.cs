@@ -1,5 +1,8 @@
-﻿using DigitalStore.Repos.Interfaces;
+﻿using DigitalStore.Identity.Initialization;
+using DigitalStore.Repos.Interfaces;
 using DigitalStore.WebUI.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

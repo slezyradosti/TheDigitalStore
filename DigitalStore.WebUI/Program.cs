@@ -9,6 +9,9 @@ using DigitalStore.BusinessLogic.Interfaces;
 using DigitalStore.BusinessLogic;
 using Microsoft.AspNetCore.Identity;
 using DigitalStore.Identity;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,7 @@ builder.Services.AddDbContext<DigitalStoreContext>(options => options.UseSqlServ
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DigitalStoreContext>();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -36,6 +40,9 @@ builder.Services.AddScoped<EmailSettings, EmailSettings>();
 builder.Services.AddTransient<IOrderProcessor, EmailOrderProcessor>();
 builder.Services.AddTransient<IProductOrderLogic, ProductOrderLogic>();
 builder.Services.AddTransient<IOrderLogic, OrderLogic>();
+//for display admin panel (or not)
+//builder.Services.AddTransient<PageModel, IndexModel>();
+//builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
