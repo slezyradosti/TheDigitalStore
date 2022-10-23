@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DigitalStore.Identity;
@@ -22,7 +23,7 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        //private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthorizationService _authService;
         public bool CanUseAdminPanel
         {
@@ -36,12 +37,12 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            //RoleManager<IdentityRole> roleManager,
+            RoleManager<IdentityRole> roleManager,
             IAuthorizationService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //_roleManager = roleManager;
+            _roleManager = roleManager;
             _authService = authService;
         }
 
@@ -103,20 +104,12 @@ namespace DigitalStore.WebUI.Areas.Identity.Pages.Account.Manage
 
             //await RoleInitializer.InitializeAsync(_userManager, _roleManager);
 
-            //var isAuthorised = await _authService
-            //    .AuthorizeAsync(User, "CanUseAdminPanel");
-            //CanUseAdminPanel = isAuthorised.Succeeded;
-            //CanUseAdminPanel = isAuthorised.Succeeded; //cant use bacause model on view is conflict
+            var isAuthorised = await _authService
+                .AuthorizeAsync(User, "AdminAccess");
+            CanUseAdminPanel = isAuthorised.Succeeded;
 
             await LoadAsync(user);
             return Page();
-        }
-
-        public async void isAuthorised()
-        {
-            var isAuthorised = await _authService
-                .AuthorizeAsync(User, "CanUseAdminPanel");
-            CanUseAdminPanel = isAuthorised.Succeeded;
         }
 
         public async Task<IActionResult> OnPostAsync()

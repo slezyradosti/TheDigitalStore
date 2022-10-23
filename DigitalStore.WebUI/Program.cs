@@ -40,9 +40,14 @@ builder.Services.AddScoped<EmailSettings, EmailSettings>();
 builder.Services.AddTransient<IOrderProcessor, EmailOrderProcessor>();
 builder.Services.AddTransient<IProductOrderLogic, ProductOrderLogic>();
 builder.Services.AddTransient<IOrderLogic, OrderLogic>();
-//for display admin panel (or not)
-//builder.Services.AddTransient<PageModel, IndexModel>();
-//builder.Services.AddControllersWithViews();
+
+//for authorization on claim-base principial
+builder.Services.AddAuthorization(options =>
+ {
+    options.AddPolicy("AdminAccess",
+    policyBuilder => policyBuilder
+    .RequireClaim("CanUseAdminPanel"));
+});
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -50,13 +55,6 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromSeconds(3600);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("CanUseAdminPanel",
-    policyBuilder => policyBuilder
-    .RequireClaim("Root"));
 });
 
 var app = builder.Build();

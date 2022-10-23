@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DigitalStore.WebUI.Controllers
 {
-    [Authorize("CanUseAdminPanel")]
+    [Authorize("AdminAccess")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepo _repo;

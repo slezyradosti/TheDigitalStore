@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DigitalStore.WebUI.Controllers
 {
-    [Authorize("CanUseAdminPanel")]
+    [Authorize("AdminAccess")]
     public class ProductController : Controller
     {
         private readonly IProductRepo _repo;

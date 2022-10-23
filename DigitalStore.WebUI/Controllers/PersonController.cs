@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalStore.WebUI.Controllers
 {
-    [Authorize("CanUseAdminPanel")]
+    [Authorize("AdminAccess")]
     public class PersonController : Controller
     {
         public IActionResult Index()
