@@ -44,7 +44,7 @@ namespace DigitalStore.Models.NotForDB
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("Администрация сайта", emailSettings.MailFromAddress));
-            emailMessage.To.Add(new MailboxAddress("", customer.EMail));
+            emailMessage.To.Add(new MailboxAddress("", customer.Email));
             emailMessage.Subject = subject;
 
             StringBuilder body = new StringBuilder()

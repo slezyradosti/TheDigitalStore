@@ -1,27 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DigitalStore.Models.Base;
-using DigitalStore.Models.MetaData;
 
 namespace DigitalStore.Models
 {
-    public class Product : EntityBase
+    public partial class Product : EntityBase
     {
-        [StringLength(50)]
-        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
-        [Display(Name = "Product Name")]
-        public string ProductName { get; set; }
-        [Display(Name = "Product Price")]
+        public Product()
+        {
+            ProductOrders = new HashSet<ProductOrder>();
+        }
+        public string ProductName { get; set; } = null!;
         public int ProductPrice { get; set; }
         public int CategoryId { get; set; }
+        public string ProductDescription { get; set; } = null!;
+        public byte[] ProductImage { get; set; } = null!;
 
-        [StringLength(300)]
-        [Display(Name = "Product Description")]
-        public string ProductDescription { get; set; }
-        public byte[] ProductImage { get; set; }
-        public List<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
-
-        [ForeignKey(nameof(CategoryId))]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; } = null!;
+        public virtual ICollection<ProductOrder> ProductOrders { get; set; }
     }
 }
