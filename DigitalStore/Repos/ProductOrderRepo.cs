@@ -15,14 +15,14 @@ namespace DigitalStore.Repos
         }
 
         public List<ProductOrder> GetRelatedData()
-            => Context.ProductOrders.FromSqlInterpolated($"SELECT * FROM ProductOrder")
+            => Context.ProductOrders.FromSqlInterpolated($"SELECT * FROM ProductOrders")
             .Include(p => p.Product.ProductName + p.Product.ProductPrice + p.Product.ProductDescription)
             .ToList();
 
         public List<ProductOrder> GetUserOrdersList(int customerId)
-            => Context.ProductOrders.FromSqlInterpolated($"SELECT * FROM ProductOrder")
-            .Include(p => p.Product.ProductName + p.Product.ProductPrice)
-            .Include(o => o.Order.OrderDate + o.Order.Customer.FirstName + o.Order.Customer.MidName + o.Order.Customer.PhoneNumber)
+            => Context.ProductOrders.FromSqlInterpolated($"SELECT * FROM ProductOrders")
+            .Include(p => p.Product)
+            .Include(o => o.Order)
             .Where(c => c.Order.Customer.Id == customerId)
             .ToList();
     }

@@ -22,22 +22,22 @@
 	<thead>
 		<tr>
 			<th>
-				Id
+				Customer FirstName
+			</th>
+			<th>
+				Customer MidName
+			</th>
+			<th>
+				Customer Phonenumber
+			</th>
+			<th>
+				Product Category
 			</th>
 			<th>
 				Product Name
 			</th>
 			<th>
 				Product Price
-			</th>
-			<th>
-				Product Description
-			</th>
-			<th>
-				Product Image
-			</th>
-			<th>
-				Category Name
 			</th>
 			<th></th>
 		</tr>
@@ -46,23 +46,23 @@
 		@foreach (var obj in Model)
 		{
 			<tr>
-				<td width="10%">
-					@obj.Product.Category.CategoryName
-				</td>
-				<td width="15%">
-					@obj.Product.ProductName
-				</td>
-				<td width="10%">
-					@obj.Product.ProductPrice $
-				</td>
 				<td width="15%">
 					@obj.Order.Customer.FirstName
 				</td>
 				<td width="15%">
 					@obj.Order.Customer.MidName
 				</td>
-				<td width="15%">
+				<td width="10%">
 					@obj.Order.Customer.PhoneNumber
+				</td>
+				<td width="10%">
+					@obj.Product.CategoryId
+				</td>
+				<td width="15%">
+					@obj.Product.ProductName
+				</td>
+				<td width="10%">
+					@obj.Product.ProductPrice $
 				</td>
 				<td>
 					<div class="w-75 btn-group" role="group">
