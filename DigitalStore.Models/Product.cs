@@ -6,19 +6,22 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    public partial class Product : EntityBase
+    public class Product : EntityBase
     {
-        public Product()
-        {
-            ProductOrders = new HashSet<ProductOrder>();
-        }
-        public string ProductName { get; set; } = null!;
+        [StringLength(50)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        [Display(Name = "Product Name")]
+        public string ProductName { get; set; }
+        [Display(Name = "Product Price")]
         public int ProductPrice { get; set; }
         public int CategoryId { get; set; }
-        public string ProductDescription { get; set; } = null!;
-        public byte[] ProductImage { get; set; } = null!;
+        [StringLength(300)]
+        [Display(Name = "Product Description")]
+        public string ProductDescription { get; set; }
+        public byte[] ProductImage { get; set; }
+        public List<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
-        public virtual Category Category { get; set; } = null!;
-        public virtual ICollection<ProductOrder> ProductOrders { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
     }
 }

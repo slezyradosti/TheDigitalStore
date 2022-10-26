@@ -6,5 +6,6 @@ namespace DigitalStore.BusinessLogic.Interfaces
     public interface IProductOrderLogic
     {
         public void AddOrderListToDb(Cart cart, Order order);
+        public List<ProductOrder> GetOrdersOfCustomers(List<Customer> customers);
     }
 }

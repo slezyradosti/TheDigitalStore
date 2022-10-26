@@ -67,7 +67,6 @@ namespace DigitalStore.Models.NotForDB
                 .AppendLine(customer.LastName ?? "")
                 .AppendLine(customer.PhoneNumber ?? "")
                 .AppendLine(customer.City.CityName)
-                //.AppendLine(customer.Country)
                 .AppendLine("---");
             //.AppendFormat("Gift wrapping: {0}",
             //    customer.GiftWrap ? "Yes" : "No");

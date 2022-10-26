@@ -90,7 +90,7 @@ namespace DigitalStore.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Checkout([Bind("FirstName, MidName, LastName, PhoneNumber, EMail, CityId")] Customer customer)
+        public IActionResult Checkout([Bind("FirstName, MidName, LastName, PhoneNumber, Email, CityId")] Customer customer)
         {
             var cart = GetCart();
             if (cart.Lines.Count() == 0)
@@ -101,6 +101,7 @@ namespace DigitalStore.WebUI.Controllers
             //if (ModelState.IsValid) // obj City and Timestamp Invalid. WHY????????
             //{
             //добавляю неавторизованного покупателя
+            customer.City = _cityRepo.GetOne(customer.CityId); // new problem
             _customerRepo.Add(customer);
 
             _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", GetCart());

@@ -29,5 +29,21 @@ namespace DigitalStore.BusinessLogic
                 _productOrderRepo.Add(newProductOrder);
             }
         }
+
+        public List<ProductOrder> GetOrdersOfCustomers(List<Customer> customers)
+        {
+            List<ProductOrder> orders = new List<ProductOrder>();
+
+            foreach (var customer in customers)
+            {
+                var customerOrders = (_productOrderRepo.GetUserOrdersList(customer.Id));
+                foreach (var customerOrder in customerOrders)
+                {
+                    orders.Add(customerOrder);
+                }
+            }
+
+            return orders;
+        }
     }
 }

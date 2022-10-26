@@ -4,14 +4,12 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    public partial class Category : EntityBase
+    public class Category : EntityBase
     {
-        public Category()
-        {
-            Products = new HashSet<Product>();
-        }
-        public string CategoryName { get; set; } = null!;
+        public List<Product> Products { get; set; } = new List<Product>();
 
-        public virtual ICollection<Product> Products { get; set; }
+        [StringLength(50)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        public string CategoryName { get; set; }
     }
 }

@@ -15,6 +15,12 @@ namespace DigitalStore.Repos
         }
 
         public List<Customer> GetRelatedData()
-            => Context.Customers.FromSqlInterpolated($"SELECT * FROM Customer").Include(c => c.City.CityName).ToList();
+            => Context.Customers.FromSqlInterpolated($"SELECT * FROM Customers").Include(o => o.Orders)
+            .Include(c => c.City.CityName).ToList();
+
+        public List<Customer> GetCustomerIdByUserId(string UserId)
+            => Context.Customers.FromSqlInterpolated($"SELECT * FROM Customers")
+            .Include(u => u.AspUsersCustomers.Where(u => u.UserId == UserId))
+            .ToList();
     }
 }

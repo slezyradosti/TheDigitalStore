@@ -7,22 +7,31 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    public partial class Customer : EntityBase
+    public class Customer : EntityBase
     {
-        public Customer()
-        {
-            AspUsersCustomers = new HashSet<AspUsersCustomer>();
-            Orders = new HashSet<Order>();
-        }
-        public string FirstName { get; set; } = null!;
-        public string MidName { get; set; } = null!;
-        public string LastName { get; set; } = null!;
-        public string PhoneNumber { get; set; } = null!;
-        public string Email { get; set; } = null!;
+        [Required]
+        [StringLength(25)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        public string FirstName { get; set; }
+        [Required]
+        [StringLength(25)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        public string MidName { get; set; }
+        [Required]
+        [StringLength(25)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        public string LastName { get; set; }
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Phone number must contain 10 digits")]
+        public string PhoneNumber { get; set; }
+        [Required]
+        public string Email { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
         public int CityId { get; set; }
 
-        public virtual City City { get; set; } = null!;
+        [ForeignKey("CityId")]
+        [Required]
+        public virtual City City { get; set; }
+
         public virtual ICollection<AspUsersCustomer> AspUsersCustomers { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -6,10 +6,6 @@ namespace DigitalStore.Models
 {
     public partial class AspNetUser
     {
-        public AspNetUser()
-        {
-            AspUsersCustomers = new HashSet<AspUsersCustomer>();
-        }
 
         public string Id { get; set; } = null!;
         public string? UserName { get; set; }

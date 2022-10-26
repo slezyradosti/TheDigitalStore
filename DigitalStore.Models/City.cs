@@ -6,16 +6,13 @@ using DigitalStore.Models.Base;
 
 namespace DigitalStore.Models
 {
-    public partial class City: EntityBase
+    public class City: EntityBase
     {
-        public City()
-        {
-            Customers = new HashSet<Customer>();
-            Orders = new HashSet<Order>();
-        }
-        public string CityName { get; set; } = null!;
+        public List<Order> Orders { get; set; } = new List<Order>();
+        public List<Customer> Customers { get; set; } = new List<Customer>();
 
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        [StringLength(50)]
+        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
+        public string CityName { get; set; }
     }
 }
