@@ -32,9 +32,10 @@ namespace DigitalStore.WebUI.Controllers
             var userId = User.Identity.GetUserId();
             var customers = _customerRepo.GetCustomerIdByUserId(userId);
             //var orders = _productOrderRepo.GetCustomerOrdersList(customers.First().Id);
-            var orders = _productOrderLogic.GetOrdersOfCustomers(customers);
+            var productOrders = _productOrderLogic.GetOrdersOfCustomers(customers);
+            ViewBag.Sum = _productOrderLogic.FindSumOfAllOrders(productOrders);
 
-            var model = PagingList.Create(orders, categoriesPageSize, pageIndex);
+            var model = PagingList.Create(productOrders, categoriesPageSize, pageIndex);
             model.Action = nameof(UserOrderList);
             return View(model);
         }

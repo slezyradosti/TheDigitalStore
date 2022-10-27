@@ -45,5 +45,16 @@ namespace DigitalStore.BusinessLogic
 
             return orders;
         }
+
+        public int FindSumOfAllOrders(IEnumerable<ProductOrder> productOrders)
+        {
+            int sum = 0;
+            foreach (var productOrder in productOrders)
+            {
+                sum += productOrder.Product.ProductPrice;
+            }
+
+            return sum;
+        }
     }
 }
