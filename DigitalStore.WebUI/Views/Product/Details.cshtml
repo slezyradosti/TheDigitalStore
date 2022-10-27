@@ -2,6 +2,8 @@
 @using DigitalStore.WebUI.ExtensionClasses
 @model Product
 
+<div id="PlaceHolderHere"></div>
+
  <div class="item p-3">
     <div class="oneItem">
         <div class="forPrice">
@@ -15,9 +17,10 @@
         <img src="@ImageConvertor.ConvetrByteArrayToString(Model.ProductImage)" style="max-width: 550px; max-height: 350px"/>
         <br/>
         <p>@Model.ProductDescription</p>
-        <a asp-controller="Product" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary" style="width:125px">
-            Buy
-        </a>
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" 
+                    data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart",  new {Id = Model.Id} )" style="width:125px">
+                        Quick Buy
+        </button>
         <a asp-controller="Product" asp-action="Index" asp-route-id="@Model.CategoryId" class="btn btn-secondary" style="width:125px">
             Back to List
         </a>
