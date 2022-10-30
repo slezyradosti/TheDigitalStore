@@ -1,20 +1,25 @@
 ﻿using DigitalStore.Models;
 using DigitalStore.Repos.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ReflectionIT.Mvc.Paging;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
 namespace DigitalStore.WebUI.Controllers
 {
+    [Authorize("AdminAccess")]
     public class CustomerController : Controller
     {
         private readonly ICustomerRepo _repo;
+        private readonly ICityRepo _cityRepo;
         private const int customerPageSize = 15;
 
-        public CustomerController(ICustomerRepo repo)
+        public CustomerController(ICustomerRepo repo, ICityRepo cityRepo)
         {
             _repo = repo;
+            _cityRepo = cityRepo;
         }
         public IActionResult Index()
         {
@@ -42,6 +47,7 @@ namespace DigitalStore.WebUI.Controllers
                 return NotFound();
             }
 
+            ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
             return View(customer);
         }
 
@@ -66,7 +72,7 @@ namespace DigitalStore.WebUI.Controllers
                     ModelState.AddModelError(string.Empty, $@"Unable to save the record. {ex.Message}");
                     return View(customer);
                 }
-                return RedirectToAction("CategoryList");
+                return RedirectToAction("CustomerList");
             }
             return View(customer);
         }
@@ -84,6 +90,7 @@ namespace DigitalStore.WebUI.Controllers
                 return NotFound();
             }
 
+            ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
             return View(customer);
         }
 
@@ -104,11 +111,12 @@ namespace DigitalStore.WebUI.Controllers
             {
                 ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
             }
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("CustomerList");
         }
 
         public IActionResult Create()
         {
+            ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
             return View();
         }
 
@@ -125,9 +133,10 @@ namespace DigitalStore.WebUI.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
+                ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
                 return View(customer);
             }
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("CustomerList");
         }
     }
 }

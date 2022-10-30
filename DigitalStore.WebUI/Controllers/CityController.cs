@@ -1,5 +1,6 @@
 ﻿using DigitalStore.Models;
 using DigitalStore.Repos.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReflectionIT.Mvc.Paging;
 using System.Data.Entity;
@@ -7,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace DigitalStore.WebUI.Controllers
 {
+    [Authorize("AdminAccess")]
     public class CityController : Controller
     {
         private readonly ICityRepo _repo;
@@ -67,7 +69,7 @@ namespace DigitalStore.WebUI.Controllers
                     ModelState.AddModelError(string.Empty, $@"Unable to save the record. {ex.Message}");
                     return View(city);
                 }
-                return RedirectToAction("CategoryList");
+                return RedirectToAction("CityList");
             }
             return View(city);
         }
@@ -105,7 +107,7 @@ namespace DigitalStore.WebUI.Controllers
             {
                 ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
             }
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("CityList");
         }
 
         public IActionResult Create()
@@ -128,7 +130,7 @@ namespace DigitalStore.WebUI.Controllers
                 ModelState.AddModelError(string.Empty, $@"Unable to create record: {ex.Message}");
                 return View(city);
             }
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("CityList");
         }
     }
 }

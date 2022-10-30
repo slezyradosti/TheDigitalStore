@@ -15,6 +15,7 @@
             <input type="hidden" asp-for="Timestamp"/>
             <div class="mb-3">
                 <label asp-for="Id"></label>
+                <br/>
                 <input asp-for="Id" class="form-contorl" readonly/>
             </div>
             <div class="mb-3">
@@ -36,6 +37,7 @@
             <button type="submit" class="btn btn-primary" style="width:150px">
                 Delete
             </button>
+            <br />
             <a asp-controller="Product" asp-action="ProductList" class="btn btn-secondary" style="width:150px">
                 Back to List
             </a>

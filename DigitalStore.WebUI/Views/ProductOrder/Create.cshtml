@@ -1,0 +1,38 @@
+﻿@using DigitalStore.Models
+@model ProductOrder
+
+@{
+    Layout = "../Shared/_PersonLayout";
+}
+<div class="container p-3">
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Create ProductOrder</h2>
+                <hr/>
+            </div>
+             <div class="form-group">
+                   <label asp-for="Product.ProductName"></label>
+                   <select asp-for="ProductId" asp-items="ViewBag.products" class ="form-control"></select>        
+             </div>
+             <div class="form-group">
+                   <label asp-for="Order.Id"></label>
+                   <select asp-for="OrderId" asp-items="ViewBag.orders" class ="form-control"></select>        
+             </div>
+             <br />
+            <button type="submit" class="btn btn-primary" style="width:150px">
+                Create
+            </button>
+            <a asp-controller="ProductOrder" asp-action="ProductOrderList" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

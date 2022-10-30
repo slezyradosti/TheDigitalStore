@@ -11,12 +11,13 @@ namespace DigitalStore.Repos
     public class OrderRepo : BaseRepo<Order>, IOrderRepo
     {
         public List<Order> GetRelatedData()
-            => Context.Orders.FromSqlInterpolated($"SELECT * FROM Order")
-            .Include(o => o.Customer.FirstName + o.Customer.LastName)
+            => Context.Orders.FromSqlInterpolated($"SELECT * FROM Orders")
+            .Include(c => c.Customer)
+            .Include(c => c.City)
             .ToList();
 
         public List<Order> GetCustomerOrdersList(int customerId)
-            => Context.Orders.FromSqlInterpolated($"SELECT * FROM Order")
+            => Context.Orders.FromSqlInterpolated($"SELECT * FROM Orders")
             .Where(o => o.CustomerId == customerId)
             .ToList();
     }

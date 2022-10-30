@@ -16,7 +16,8 @@ namespace DigitalStore.Repos
 
         public List<ProductOrder> GetRelatedData()
             => Context.ProductOrders.FromSqlInterpolated($"SELECT * FROM ProductOrders")
-            .Include(p => p.Product.ProductName + p.Product.ProductPrice + p.Product.ProductDescription)
+            .Include(p => p.Product)
+            .Include(o => o.Order).ThenInclude(c => c.Customer).ThenInclude(c => c.City)
             .ToList();
 
         public List<ProductOrder> GetUserOrdersList(int customerId)

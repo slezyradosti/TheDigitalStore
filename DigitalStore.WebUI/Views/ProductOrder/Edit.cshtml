@@ -1,0 +1,44 @@
+﻿@using DigitalStore.Models
+@using DigitalStore.WebUI.ExtensionClasses
+@model ProductOrder
+
+@{
+    Layout = "../Shared/_PersonLayout";
+}
+
+<div class="container p-3">
+    <form method="post" enctype="multipart/form-data">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Edit ProductOrder</h2>
+                <hr/>
+            </div>
+            <input type="hidden" asp-for="Timestamp"/>
+            <div class="mb-3">
+                <label asp-for="Id"></label>
+                <br/>
+                <input asp-for="Id" class="form-contorl" readonly/>
+            <div class="form-group">
+                   <label asp-for="Product.ProductName"></label>
+                   <select asp-for="ProductId" asp-items="ViewBag.products" class ="form-control"></select>        
+             </div>
+             <div class="form-group">
+                   <label asp-for="OrderId"></label>
+                   <select asp-for="OrderId" asp-items="ViewBag.orders" class ="form-control"></select>        
+             </div>
+              <br />
+            <button type="submit" class="btn btn-primary" style="width:150px">
+                Update
+            </button>
+            <a asp-controller="ProductOrder" asp-action="ProductOrderList" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

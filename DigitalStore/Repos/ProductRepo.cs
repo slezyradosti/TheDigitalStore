@@ -26,7 +26,7 @@ namespace DigitalStore.Repos
             => Context.Products.Where(p => p.Category == category).ToList();
 
         public List<Product> GetRelatedData()
-            => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category.CategoryName).ToList();
+            => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category).ToList();
 
         public List<Product> GetTenRandomItems(int productCount)
         {

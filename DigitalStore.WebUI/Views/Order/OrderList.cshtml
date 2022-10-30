@@ -1,0 +1,83 @@
+﻿@using DigitalStore.Models
+@using DigitalStore.WebUI.ExtensionClasses
+@using ReflectionIT.Mvc.Paging
+@model ReflectionIT.Mvc.Paging.PagingList<Order>
+@addTagHelper *, ReflectionIT.Mvc.Paging
+
+@{
+    Layout = "../Shared/_PersonLayout";
+}
+
+<nav class="pagination">
+    <vc:pager paging-list="@Model"/>
+</nav>
+
+<div class="container p-3">
+<table class="table table-bordered table-striped" style="width:100%">
+	<div class="col-12 text-end">
+			<a asp-controller="Order" asp-action="Create" class="btn btn-primary" style="width:100px">
+				<i class="bi bi-plus-square"></i> &nbsp; Create
+			</a>
+	</div>
+	<thead>
+		<tr>
+			<th>
+				Id
+			</th>
+			<th>
+				Order Date
+			</th>
+			<th>
+				Delivery Date
+			</th>
+			<th>
+				First Name
+			</th>
+			<th>
+				Last Name
+			</th>
+			<th>
+				City Name
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model)
+		{
+			<tr>
+				<td width="10%">
+					@obj.Id
+				</td>
+				<td width="10%">
+					@obj.OrderDate
+				</td>
+				<td width="15%">
+					@obj.DeliveryDate
+				</td>
+				<td width="10%">
+					@obj.Customer.FirstName
+				</td>
+				<td width="10%">
+					@obj.Customer.LastName
+				</td>
+				<td width="10%">
+					@obj.City.CityName
+				</td>
+				<td>
+					<div class="w-75 btn-group" role="group">
+						<a asp-controller="Order" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="width:50px">
+							<i class="bi bi-pencil"></i>Edit</a>
+							<a asp-controller="Order" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2" style="width:50px">
+							Delete</a>
+					</div>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+</div>
+
+<nav class="pagination">
+    <vc:pager paging-list="@Model"/>
+</nav>
