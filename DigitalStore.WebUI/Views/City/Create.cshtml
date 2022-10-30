@@ -1,0 +1,35 @@
+﻿@using DigitalStore.Models
+@model City
+
+@{
+    Layout = "../Shared/_PersonLayout";
+}
+
+<div class="container p-3">
+    <form method="post">
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Create City</h2>
+                <hr/>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CityName"></label>
+                <input asp-for="CityName" class="form-contorl" />
+                <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:150px">
+                Create
+            </button>
+            <a asp-controller="City" asp-action="CityList" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

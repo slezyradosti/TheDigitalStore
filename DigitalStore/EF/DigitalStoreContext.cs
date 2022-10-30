@@ -76,32 +76,39 @@ namespace DigitalStore.EF
             modelBuilder.Entity<Product>()
                 .HasOne(e => e.Category)
                 .WithMany(e => e.Products)
+                .HasForeignKey(e => e.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<ProductOrder>()
                 .HasOne(e => e.Product)
                 .WithMany(e => e.ProductOrders)
+                .HasForeignKey(e => e.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<ProductOrder>()
                 .HasOne(e => e.Order)
                 .WithMany(e => e.ProductOrders)
+                .HasForeignKey(e => e.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<Order>()
                 .HasOne(e => e.Customer)
                 .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.CustomerId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<Order>()
                 .HasOne(e => e.City)
                 .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.CityId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<Customer>()
                 .HasOne(e => e.City)
                 .WithMany(e => e.Customers)
+                .HasForeignKey(e => e.CityId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
             // for Identity
             base.OnModelCreating(modelBuilder);
         }

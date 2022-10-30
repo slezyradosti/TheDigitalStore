@@ -5,6 +5,7 @@ using DigitalStore.Models.NotForDB;
 using DigitalStore.WebUI.ExtensionClasses;
 using DigitalStore.Repos.Interfaces;
 using DigitalStore.BusinessLogic.Interfaces;
+using DigitalStore.BusinessLogic;
 
 namespace DigitalStore.WebUI.Controllers
 {

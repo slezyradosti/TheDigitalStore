@@ -31,7 +31,7 @@ namespace DigitalStore.WebUI.Controllers
         {
             var userId = User.Identity.GetUserId();
             var customers = _customerRepo.GetCustomerIdByUserId(userId);
-            //var orders = _productOrderRepo.GetCustomerOrdersList(customers.First().Id);
+
             var productOrders = _productOrderLogic.GetOrdersOfCustomers(customers);
             ViewBag.Sum = _productOrderLogic.FindSumOfAllOrders(productOrders);
 

@@ -13,10 +13,14 @@ namespace DigitalStore.Repos
         public CustomerRepo(DigitalStoreContext context) : base(context)
         {
         }
+        public override List<Customer> GetAll()
+            => GetAll(c => c.FirstName, true).ToList();
 
         public List<Customer> GetRelatedData()
-            => Context.Customers.FromSqlInterpolated($"SELECT * FROM Customers").Include(o => o.Orders)
-            .Include(c => c.City.CityName).ToList();
+            => Context.Customers.FromSqlInterpolated($"SELECT * FROM Customers")
+            .Include(o => o.Orders)
+            .Include(c => c.City)
+            .ToList();
 
         public List<Customer> GetCustomerIdByUserId(string UserId)
             => Context.Customers.FromSqlInterpolated($"SELECT * FROM Customers")

@@ -7,7 +7,6 @@ namespace DigitalStore.Repos.Interfaces
         List<Product> Search(string searchString);
         List<Product> Search(int? categoryId);
         List<Product> Search(Category category);
-        // List<Product> GetAllPromotionalProducts();
         List<Product> GetRelatedData();
         List<Product> GetTenRandomItems(int productCount);
     }

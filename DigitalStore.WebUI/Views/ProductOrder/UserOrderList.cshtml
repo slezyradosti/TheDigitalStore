@@ -19,6 +19,9 @@
 	<thead>
 		<tr>
 			<th>
+				Number
+			</th>
+			<th>
 				Customer FirstName
 			</th>
 			<th>
@@ -40,9 +43,16 @@
 		</tr>
 	</thead>
 	<tbody>
+		@{
+			int counter = 0;
+		}
 		@foreach (var obj in Model)
 		{
+			counter++;
 			<tr>
+				<td width="5%">
+					@counter
+				</td>
 				<td width="15%">
 					@obj.Order.Customer.FirstName
 				</td>

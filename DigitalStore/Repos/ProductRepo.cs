@@ -25,9 +25,6 @@ namespace DigitalStore.Repos
         public List<Product> Search(Category category)
             => Context.Products.Where(p => p.Category == category).ToList();
 
-        //public List<Product> GetPromotionalProducts()
-        //    => GetSome(x => x.isPromoted == true);
-
         public List<Product> GetRelatedData()
             => Context.Products.FromSqlInterpolated($"SELECT * FROM Product").Include(p => p.Category.CategoryName).ToList();
 

@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using System.Text;
 using DigitalStore.Repos.Interfaces;
 using DigitalStore.BusinessLogic.Interfaces;
+using DigitalStore.Models;
+using DigitalStore.Models.NotForDB;
 
-namespace DigitalStore.Models.NotForDB
+namespace DigitalStore.BusinessLogic
 {
     public class EmailOrderProcessor : IOrderProcessor
     {
