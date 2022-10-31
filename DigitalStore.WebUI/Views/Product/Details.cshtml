@@ -16,7 +16,7 @@
         </div>
         <img src="@ImageConvertor.ConvetrByteArrayToString(Model.ProductImage)" style="max-width: 550px; max-height: 350px"/>
         <br/>
-        <p>@Model.ProductDescription</p>
+        <p class="overflow-scroll">@Model.ProductDescription</p>
         <button type="button" class="btn btn-primary" data-toggle="ajax-modal" 
                     data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart",  new {Id = Model.Id} )" style="width:125px">
                         Quick Buy

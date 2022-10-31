@@ -27,7 +27,7 @@
             </h3> 
             <br/>
         </div>
-        <p>@product.ProductDescription</p>
+        <p class="overflow-hidden">@product.ProductDescription</p>
         <div class="myButtons">
             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" 
                     data-target="#buyProduct" data-url="@Url.Action("Buy", "Cart",  new {Id = product.Id} )" style="width:125px">

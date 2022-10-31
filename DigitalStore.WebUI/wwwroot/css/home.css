@@ -26,6 +26,8 @@ ul.hr {
 }
 
     ul.hr li {
+        position: relative;
+
         margin: 15px;
         display: inline-block; /* Отображать как строчный элемент */
         margin-right: 15px; /* Отступ слева */
@@ -39,8 +41,9 @@ ul.hr {
 
 
 .myButtons {
-    position: relative;
+    position: absolute;
     bottom: 0px;
-    height: 100px;
+    height: 80px;
     width: 300px;
+    box-sizing: border-box;
 }
