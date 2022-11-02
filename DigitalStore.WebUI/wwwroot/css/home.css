@@ -48,30 +48,17 @@ ul.hr {
     box-sizing: border-box;
 }
 
-.resetForMainPicture .mainPicture{
-    max-width: 20000px !important;
-    --bs-gutter-x: 0;
-    --bs-gutter-y: 0;
-    padding-right: 0;
-    padding-left: 0px;
-    margin-right: 0;
-    margin-left: 0;
-    color: red;
-}
-
 .mainPicture {
     position: relative;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 2000px !important;
     min-height: 835px;
 }
 
 .display-main {
     position: absolute;
-    max-width: 2000px !important;
     width: 100%;
     height: 100%;
     top: -17px;
