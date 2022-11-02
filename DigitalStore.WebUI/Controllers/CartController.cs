@@ -131,7 +131,7 @@ namespace DigitalStore.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Buy(Customer customer)
+        public IActionResult Buy([Bind("FirstName, MidName, LastName, PhoneNumber, Email, CityId")] Customer customer)
         {
             var cart = GetCart();
             if (cart.Lines.Count() == 0)
