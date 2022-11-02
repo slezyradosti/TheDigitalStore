@@ -241,7 +241,7 @@ a {
 }
 
     a:hover {
-        color: var(--bs-link-hover-color)
+        color: var(--bs-link-hover-color);
     }
 
     a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -614,7 +614,7 @@ progress {
 
 @media (min-width:576px) {
     .container, .container-sm {
-        max-width: 540px
+        max-width: 540px 
     }
 }
 

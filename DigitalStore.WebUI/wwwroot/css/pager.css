@@ -9,7 +9,8 @@
         display: inline;
     }
 
-        ul.pagination li a {
+        ul.pagination li a{
+
             color: black;
             float: left;
             padding: 8px 16px;

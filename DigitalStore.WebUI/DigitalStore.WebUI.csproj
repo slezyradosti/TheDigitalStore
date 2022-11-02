@@ -43,6 +43,7 @@
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Shared\Components\Cart\" />
     <Folder Include="Views\Shared\Components\Person\" />
+    <Folder Include="wwwroot\css\pictures\" />
   </ItemGroup>
 
 </Project>

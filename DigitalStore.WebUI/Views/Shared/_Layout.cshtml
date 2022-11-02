@@ -62,16 +62,31 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            <partial name="_Notification" />
-            @RenderBody()
-        </main>
-    </div>
+
+    @if (!String.IsNullOrEmpty(ViewBag.isHome)){            
+    <section class="mainPicture"> 
+        <div class="display-main">
+            <div id="onlineStore">Online store</div>
+            <div id="digitalAppliances">Digital appliances</div>
+            <div id="weHave">
+                <p>We have a large selection of:</p>
+                <p>smartphones</p>
+                <p>laptops</p>
+                <p>TVs</p>
+            </div>
+        </div>
+    </section>
+    }
+        <div class="container">
+            <main role="main" class="pb-3">
+                <partial name="_Notification" />
+                @RenderBody()
+            </main>
+        </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - DigitalStore.WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - DigitalStore
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

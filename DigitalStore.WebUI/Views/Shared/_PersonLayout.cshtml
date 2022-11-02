@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/pager.css"/>
-    <link rel="stylesheet" href="~/css/Theme.css"/>
+    <link rel="stylesheet" href="~/css/DarkTheme.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sideMenu.css"/>
+    <link rel="stylesheet" href="~/css/NewDesign.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
 <body>
@@ -28,22 +29,22 @@
     <div class="sidenavmenu" id="adminSidenavnemu">
         <a class="closebtn" href="#" onclick="closeNavmenu()">X</a>
         <br />
-        <a asp-controller="Category" asp-action="CategoryList" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="Category" asp-action="CategoryList" class="btn" style="width:220px">
             Categories
         </a>
-        <a asp-controller="City" asp-action="CityList" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="City" asp-action="CityList" class="btn" style="width:220px">
             Cities
         </a>
-        <a asp-controller="Customer" asp-action="CustomerList" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="Customer" asp-action="CustomerList" class="btn" style="width:220px">
             Customers
         </a>
-        <a asp-controller="Order" asp-action="OrderList" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="Order" asp-action="OrderList" class="btn" style="width:220px">
             Orders
         </a>
-        <a asp-controller="Product" asp-action="ProductList" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="Product" asp-action="ProductList" class="btn" style="width:220px">
             Products
         </a>
-        <a asp-controller="ProductOrder" asp-action="ProductOrderList" class="btn btn-secondary" style="width:220px">
+        <a asp-controller="ProductOrder" asp-action="ProductOrderList" class="btn" style="width:220px">
             ProductOrders
         </a>
     </div>
@@ -56,7 +57,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - DigitalStore.WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - DigitalStore
         </div>
     </footer>
 

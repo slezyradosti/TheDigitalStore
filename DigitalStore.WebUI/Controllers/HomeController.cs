@@ -1,4 +1,5 @@
 ﻿using DigitalStore.Identity.Initialization;
+using DigitalStore.Models;
 using DigitalStore.Repos.Interfaces;
 using DigitalStore.WebUI.Models;
 using Microsoft.AspNet.Identity;
@@ -21,15 +22,18 @@ namespace DigitalStore.WebUI.Controllers
 
         public IActionResult Index()
         {
+            IEnumerable<Product> randomProductsList;
             try
             {
-                var randomList = _repo.GetTenRandomItems(6);
-                return View(randomList);
+                randomProductsList = _repo.GetTenRandomItems(6);          
             }
             catch(Exception ex)
             {
                 return View(null);
             }
+
+            ViewBag.isHome = "home";
+            return View(randomProductsList);
         }
 
         public IActionResult Privacy()
