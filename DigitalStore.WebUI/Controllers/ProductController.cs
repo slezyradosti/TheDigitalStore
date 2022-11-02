@@ -80,7 +80,6 @@ namespace DigitalStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ProductName,ProductPrice,ProductDescription,CategoryId")] Product product, IFormFile image)
         {
-            //if (!ModelState.IsValid) return View(product); //bind???
             try
             {
                 product.ProductImage = ImageConvertor.ConvetrImageToByteArray(image);
@@ -119,7 +118,6 @@ namespace DigitalStore.WebUI.Controllers
             {
                 return BadRequest();
             }
-            //if (!ModelState.IsValid) return View(product);
             try
             {
                 _repo.Update(product);

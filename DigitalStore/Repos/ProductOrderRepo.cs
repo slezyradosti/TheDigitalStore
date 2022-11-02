@@ -22,7 +22,7 @@ namespace DigitalStore.Repos
 
         public List<ProductOrder> GetUserOrdersList(int customerId)
             => Context.ProductOrders.FromSqlInterpolated($"SELECT * FROM ProductOrders")
-            .Include(p => p.Product)
+            .Include(p => p.Product).ThenInclude(p => p.Category)
             .Include(o => o.Order)
             .Where(c => c.Order.Customer.Id == customerId)
             .ToList();
