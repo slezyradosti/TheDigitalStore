@@ -4,7 +4,6 @@ namespace DigitalStore.Models.NotForDB
 {
     public class ShippingDetails
     {
-        //[Required(ErrorMessage = "Set your Name")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Set address for delivery")]

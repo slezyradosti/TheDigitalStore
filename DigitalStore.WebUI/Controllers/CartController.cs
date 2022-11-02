@@ -99,10 +99,10 @@ namespace DigitalStore.WebUI.Controllers
                 ModelState.AddModelError("", "Sorry, your basket is empty!");
             }
 
-            //if (ModelState.IsValid) // obj City and Timestamp Invalid. WHY????????
+            //if (ModelState.IsValid) // obj City and Timestamp Invalid. why?
             //{
             //добавляю неавторизованного покупателя
-            customer.City = _cityRepo.GetOne(customer.CityId); // new problem
+            customer.City = _cityRepo.GetOne(customer.CityId);
             _customerRepo.Add(customer);
 
             _orderProcessor.SendPurchaseEmailAsync(customer, "Your Purchase", GetCart());
@@ -112,12 +112,6 @@ namespace DigitalStore.WebUI.Controllers
             ClearCart(cart);
             TempData["success"] = "Order processed";
             return View("Completed");
-            //}
-            //else
-            //{
-            //    ViewBag.cities = new SelectList(_cityRepo.GetAll(), "Id", "CityName");
-            //    return View(customer);
-            //}
         }
 
         public IActionResult Buy(int Id)

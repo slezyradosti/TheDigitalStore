@@ -12,7 +12,6 @@ namespace DigitalStore.Models
         public List<Customer> Customers { get; set; } = new List<Customer>();
 
         [StringLength(50)]
-        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
         public string CityName { get; set; }
     }
 }

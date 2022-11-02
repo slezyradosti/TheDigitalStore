@@ -48,16 +48,6 @@ ul.hr {
     box-sizing: border-box;
 }
 
-/*.mainpicture {
-    position: relative;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 100%;
-    min-height: 835px;
-}*/
-
 .resetForMainPicture .mainPicture{
     max-width: 20000px !important;
     --bs-gutter-x: 0;
@@ -78,15 +68,6 @@ ul.hr {
     max-width: 2000px !important;
     min-height: 835px;
 }
-
-/*.display-main {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: -17px;
-    background: url(pictures/sbfkjx6g5qm8sjxu-1.jpg);
-    background-size: cover;  
-}*/
 
 .display-main {
     position: absolute;

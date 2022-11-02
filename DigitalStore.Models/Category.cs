@@ -9,7 +9,6 @@ namespace DigitalStore.Models
         public List<Product> Products { get; set; } = new List<Product>();
 
         [StringLength(50)]
-        //[Index("IDX_CreditRisk_Name", IsUnique = true, Order = 1)]
         public string CategoryName { get; set; }
     }
 }

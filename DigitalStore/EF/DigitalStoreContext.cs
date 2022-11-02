@@ -12,7 +12,6 @@ namespace DigitalStore.EF
     {
         public DigitalStoreContext()
         {
-
         }
 
         public DigitalStoreContext(DbContextOptions<DigitalStoreContext> options) : base(options)
@@ -29,7 +28,7 @@ namespace DigitalStore.EF
 
         public string GetTableName(Type type)
         {
-            return Model.FindEntityType(type).GetTableName();// GetAnnotation("Relational:TableName").Value.ToString();  // .SqlServer().TableName;
+            return Model.FindEntityType(type).GetTableName();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -46,14 +45,6 @@ namespace DigitalStore.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //create the multi column index
-            //modelBuilder.Entity<Customer>(entity =>
-            //{
-            //    entity.HasIndex(e => new { e.FirstName, e.MidName, e.LastName }).IsUnique();
-
-            //});
-            //set the cascade options on the relationship       
-
             modelBuilder.Entity<AspUsersCustomer>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
