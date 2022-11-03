@@ -46,3 +46,7 @@ This project implements the basic functions of an online store: search, purchase
 </li>
 <li>and other</li>
 </ul>
+
+# Database Diagram
+
+![](https://github.com/slezyradosti/TheDigitalStore/blob/main/DigitalStore.WebUI/gifs%20for%20github/databaseDiagram.png)
