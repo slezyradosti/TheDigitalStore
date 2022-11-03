@@ -1,6 +1,8 @@
 # TheDigitalStore
 Web application of online store.
 
+This project implements the basic functions of an online store: search, purchase, confirmation letter, admin panel, authorization and authentication.
+
 # Used technologies
 <ul>
 <li>ASP.NET Core</li>
